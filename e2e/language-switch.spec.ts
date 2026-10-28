@@ -16,10 +16,10 @@ test.describe("Footer - Language Picker", () => {
 
     const totalHeight = await page.evaluate(() => document.body.scrollHeight);
 
-    for (let y = 0; y < totalHeight; y += 50) {
-      await page.mouse.wheel(0, 50);
-      await page.mouse.move(400, 200 + y * 0.02);
-      await page.waitForTimeout(40);
+    for (let y = 0; y < totalHeight; y += 400) {
+      await page.mouse.wheel(0, 400);
+      await page.mouse.move(400, Math.min(200 + y * 0.02, 700));
+      await page.waitForTimeout(10);
     }
 
     await page.waitForTimeout(800);
@@ -50,10 +50,10 @@ test.describe("Footer - Language Picker", () => {
     const scrollBackHeight = await page.evaluate(
       () => document.body.scrollHeight
     );
-    for (let y = scrollBackHeight; y > 0; y -= 50) {
-      await page.mouse.wheel(0, -50);
-      await page.mouse.move(400, 600 - y * 0.02);
-      await page.waitForTimeout(40);
+    for (let y = scrollBackHeight; y > 0; y -= 400) {
+      await page.mouse.wheel(0, -400);
+      await page.mouse.move(400, Math.max(200, 600 - y * 0.02));
+      await page.waitForTimeout(10);
     }
 
     const hero = page
