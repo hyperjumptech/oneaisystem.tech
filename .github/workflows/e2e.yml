@@ -18,7 +18,7 @@ concurrency:
 jobs:
   direct_push_check:
     name: Detect direct push to main
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       is_direct: ${{ steps.detect.outputs.is_direct }}
     steps:
@@ -45,7 +45,7 @@ jobs:
             core.setOutput('is_direct', String(data.length === 0))
 
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: mcr.microsoft.com/playwright:v1.57.0-jammy
       options: --ipc=host
@@ -126,7 +126,7 @@ jobs:
 
   e2e_report:
     name: Merge Playwright report
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Skip when `e2e` did not run (e.g. merge push to main); merge-reports fails with no blob artifacts.
     if: ${{ !cancelled() && (needs.e2e.result == 'success' || needs.e2e.result == 'failure') }}
     needs: [direct_push_check, e2e]
