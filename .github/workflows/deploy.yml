@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   id-token: write
+  pages: write
 
 # One deploy at a time; never cancel a deploy mid-push.
 concurrency:
