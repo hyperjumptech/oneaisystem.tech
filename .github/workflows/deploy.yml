@@ -8,6 +8,7 @@ on:
 # peaceiris/actions-gh-pages pushes the gh-pages branch.
 permissions:
   contents: write
+  id-token: write
 
 # One deploy at a time; never cancel a deploy mid-push.
 concurrency:
