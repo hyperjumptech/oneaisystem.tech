@@ -36,7 +36,7 @@ for (const locale of supportedLanguages) {
     test.describe("Header", headerTest(locale));
     test.describe("Language Switching", languageSwitcherTest(locale));
     test.describe("Images", imagesTest());
-    test.describe("Footer", footerTest(locale));
+    test.describe("Footer", footerTest());
     test.describe("Meta title and description should exist", metaTest());
     test.describe("Responsive Design", responsiveTest(path));
 

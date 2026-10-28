@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+# peaceiris/actions-gh-pages pushes the gh-pages branch.
+permissions:
+  contents: write
+
+# One deploy at a time; never cancel a deploy mid-push.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+env:
+  NEXT_PUBLIC_AI_AGENT_URL: ${{ vars.NEXT_PUBLIC_AI_AGENT_URL }}
+  NEXT_PUBLIC_INFERENCEAI_POST_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_INFERENCEAI_POST_CHATS_WEBHOOK }}
+  NEXT_PUBLIC_INFERENCEAI_GET_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_INFERENCEAI_GET_CHATS_WEBHOOK }}
+  NEXT_PUBLIC_LANDING_POST_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_LANDING_POST_CHATS_WEBHOOK }}
+  NEXT_PUBLIC_LANDING_GET_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_LANDING_GET_CHATS_WEBHOOK }}
+  NEXT_PUBLIC_LANDING_GET_FOLLOWUP_WEBHOOK: ${{ vars.NEXT_PUBLIC_LANDING_GET_FOLLOWUP_WEBHOOK }}
+  NEXT_PUBLIC_GA_TRACKING_ID: ${{ vars.NEXT_PUBLIC_GA_TRACKING_ID }}
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+  NEXT_PUBLIC_FRONTIERNOTES_API_URL: ${{ vars.NEXT_PUBLIC_FRONTIERNOTES_API_URL }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build and export
+        run: bun run build
+        env:
+          NEXT_PUBLIC_AI_AGENT_URL: ${{ vars.NEXT_PUBLIC_AI_AGENT_URL }}
+          NEXT_PUBLIC_INFERENCEAI_POST_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_INFERENCEAI_POST_CHATS_WEBHOOK }}
+          NEXT_PUBLIC_INFERENCEAI_GET_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_INFERENCEAI_GET_CHATS_WEBHOOK }}
+          NEXT_PUBLIC_LANDING_POST_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_LANDING_POST_CHATS_WEBHOOK }}
+          NEXT_PUBLIC_LANDING_GET_CHATS_WEBHOOK: ${{ vars.NEXT_PUBLIC_LANDING_GET_CHATS_WEBHOOK }}
+          NEXT_PUBLIC_LANDING_GET_FOLLOWUP_WEBHOOK: ${{ vars.NEXT_PUBLIC_LANDING_GET_FOLLOWUP_WEBHOOK }}
+          NEXT_PUBLIC_GA_TRACKING_ID: ${{ vars.NEXT_PUBLIC_GA_TRACKING_ID }}
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
+          NEXT_PUBLIC_FRONTIERNOTES_API_URL: ${{ vars.NEXT_PUBLIC_FRONTIERNOTES_API_URL }}
+
+      # `next build` wipes out/, so the sitemap must be generated after the build.
+      - name: Generate sitemap
+        run: bun .github/scripts/generate-sitemap.js
+
+      - name: Create CNAME file
+        run: echo "oneaisystem.tech" > out/CNAME
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
