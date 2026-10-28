@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "title": "OneAI: Unified Enterprise AI Platform | Hyperjump",
+    "description": "One controlled AI platform for your whole company. On-prem or isolated hosting, one budget, Zero Data Retention, and the latest models for teams of up to 40 users."
+  },
+  "hero": {
+    "eyebrow": "Unified enterprise AI",
+    "heading": "OneAI",
+    "lede": "One workspace your company owns, with the models your teams already want: OpenAI, Claude, Gemini, DeepSeek, and others. It runs only for you, on your servers or isolated on ours.",
+    "proofs": {
+      "0": "Centralized dashboard",
+      "1": "One budget for everyone",
+      "2": "Latest models on release",
+      "3": "On-prem, or isolated hosting"
+    },
+    "cta": "Request OneAI plan",
+    "visual": {
+      "chat_label": "AI workspace for teams",
+      "admin_label": "Central admin dashboard"
+    }
+  },
+  "pillars": {
+    "label": "Why teams choose OneAI",
+    "0": {
+      "kicker": "01 · Control",
+      "title": "Centralized AI rollout",
+      "text": "Installed on your servers so company data stays with you. We maintain it. Prefer not to host? We run an isolated OneAI instance for your company only. ZDR: data is not stored for model training."
+    },
+    "1": {
+      "kicker": "02 · Budget",
+      "title": "One invoice for all",
+      "text": "Pay once per month for every employee. Set limits per team or even per user, with no individual AI stipends that are hard to track or reconcile."
+    },
+    "2": {
+      "kicker": "03 · Capacity",
+      "title": "Latest models, fast",
+      "text": "Use OpenAI, Claude, Gemini, DeepSeek, and other models as they launch. Admins choose which ones each team can access."
+    }
+  },
+  "capabilities": {
+    "label": "What your team can do",
+    "0": {
+      "title": "Ask your files",
+      "text": "Upload a file in the chat, pick the document, and ask. Follow up in the same thread."
+    },
+    "1": {
+      "title": "Shared knowledge",
+      "text": "A VolunteerNow Helpdesk agent answers from one shared knowledge base. Nobody re-uploads the same files."
+    },
+    "2": {
+      "title": "Create/Edit Documents",
+      "text": "Word, PowerPoint, Excel, or PDF. Type the brief, then download the file."
+    },
+    "3": {
+      "title": "Run code",
+      "text": "Python or JavaScript for scraping, a website proof of concept, or charts. Review what it ran."
+    },
+    "4": {
+      "title": "Web search",
+      "text": "Turn web search on when an answer needs the live web. Off, and the model stays at its knowledge cutoff."
+    },
+    "5": {
+      "title": "PII Handling",
+      "text": "National ID, email, and more. Detect it, redact it, or block the message."
+    },
+    "6": {
+      "title": "Budget",
+      "text": "Limits by provider, virtual key, model, organization, team, or user. Cap by cost, tokens, or requests."
+    },
+    "7": {
+      "title": "Multiple Providers",
+      "text": "Connect the providers you already use. Everyone works in one workspace."
+    }
+  },
+  "comparison": {
+    "eyebrow": "Why a ChatGPT seat is not the same product",
+    "heading_parts": {
+      "before_highlights": "ChatGPT seats cost less for small teams. Choose OneAI when you need ",
+      "control": "control",
+      "after_control": ", ",
+      "multiple_models": "multiple models",
+      "after_multiple_models": ", and ",
+      "one_budget": "one budget",
+      "after_one_budget": " across providers, not cheaper chat."
+    },
+    "lede": "A fair objection: \"We can give employees money, or buy ChatGPT Business.\" That makes sense for small teams with chat-only needs. ChatGPT Business already includes model usage, company knowledge, files, code, and admin controls. OneAI is a different product: multi-model access, on-prem or isolated hosting, and one budget across vendors.",
+    "not_for_you": {
+      "kicker": "Not for you if",
+      "title": "Fewer than 20 people with chat-only needs",
+      "text": "For that team size, ChatGPT Plus or Business is usually enough and cheaper. OneAI isn't meant to replace personal subscriptions at that scale."
+    },
+    "good_fit": {
+      "kicker": "Good fit if",
+      "title": "20-40 people who need one platform, not 20-40 subscriptions",
+      "text": "One platform for up to 40 users, with a shared budget across model providers, on-prem or isolated hosting, multi-model access, and local implementation. Choose the platform when you need control beyond a chat subscription."
+    },
+    "table_label": "Capability comparison",
+    "advantage_price_badge": "Best value",
+    "advantage_included_badge": "Included",
+    "columns": {
+      "feature": "Feature",
+      "stipend": "Individual stipends",
+      "chatgpt": "ChatGPT Business",
+      "copilot": "Microsoft 365 Copilot",
+      "oneai": "OneAI"
+    },
+    "rows": {
+      "0": {
+        "feature": "Deployment fit",
+        "stipend": "Individual accounts",
+        "chatgpt": "Vendor workspace",
+        "copilot": "Microsoft workspace",
+        "oneai": "Company AI platform"
+      },
+      "1": {
+        "feature": "Governance",
+        "stipend": "Employee managed",
+        "chatgpt": "Single-vendor controls",
+        "copilot": "Microsoft controls",
+        "oneai": "Cross-provider controls"
+      },
+      "2": {
+        "feature": "Usage budget across providers",
+        "stipend": "No",
+        "chatgpt": "ChatGPT usage included",
+        "copilot": "No · flat add-on fee",
+        "oneai": "Shared budget across providers"
+      },
+      "3": {
+        "feature": "One budget across providers",
+        "stipend": "No",
+        "chatgpt": "ChatGPT only",
+        "copilot": "No · per-provider toggles",
+        "oneai": "Yes"
+      },
+      "4": {
+        "feature": "Single invoice & usage reports",
+        "stipend": "No",
+        "chatgpt": "Yes · ChatGPT only",
+        "copilot": "Yes · Microsoft only",
+        "oneai": "Yes · all models"
+      },
+      "5": {
+        "feature": "Ensure funds used for AI",
+        "stipend": "No",
+        "chatgpt": "Yes · within ChatGPT",
+        "copilot": "Requires M365 bundle",
+        "oneai": "Yes"
+      },
+      "6": {
+        "feature": "Admin chooses available models",
+        "stipend": "No",
+        "chatgpt": "OpenAI models only",
+        "copilot": "Yes · Microsoft + Anthropic + OpenAI",
+        "oneai": "Yes · across providers"
+      },
+      "7": {
+        "feature": "Multi-model, not one vendor",
+        "stipend": "Depends on individual",
+        "chatgpt": "No · OpenAI only",
+        "copilot": "Yes · Microsoft, Anthropic, OpenAI",
+        "oneai": "Yes"
+      },
+      "8": {
+        "feature": "Zero Data Retention (ZDR)",
+        "stipend": "No",
+        "chatgpt": "Default: no training · not ZDR",
+        "copilot": "No · stores interaction history",
+        "oneai": "Yes"
+      },
+      "9": {
+        "feature": "Internal knowledge, office files, code",
+        "stipend": "No",
+        "chatgpt": "Yes · ChatGPT",
+        "copilot": "Yes · Word/Excel/PPT/Teams",
+        "oneai": "Yes · all models"
+      },
+      "10": {
+        "feature": "On-prem or isolated instance",
+        "stipend": "No",
+        "chatgpt": "No · vendor cloud",
+        "copilot": "No · cloud-only",
+        "oneai": "Yes"
+      }
+    },
+    "assumptions": "Capability notes: product availability and terms may change. Contact each provider for current commercial terms.",
+    "why_section": {
+      "label": "Why OneAI",
+      "heading": "One platform beats three workarounds",
+      "desc": "Stipends fail at control. ChatGPT Business is a strong single-vendor seat. OneAI is the platform when you need multiple models, isolated or on-prem hosting, and one budget across providers."
+    },
+    "why": {
+      "0": {
+        "title": "Stipends often don't become AI spending",
+        "text": "Money in employee accounts can be spent on anything. There is no model reporting, no audit trail, and no way to enforce company policy. <strong>You pay for capacity you cannot see.</strong>"
+      },
+      "1": {
+        "title": "A seat is not the product",
+        "text": "The case for OneAI is <strong>one platform across vendors</strong>, not a cheaper OpenAI chat seat."
+      },
+      "2": {
+        "title": "ChatGPT already ships knowledge, files, and code",
+        "text": "Company knowledge, connectors, office files, code, SSO, and admin controls are in ChatGPT Business today. OneAI adds multi-model choice, on-prem or isolated hosting, one budget across providers, and local implementation. That is not a claim that those features must be bought separately."
+      }
+    }
+  },
+  "support": {
+    "eyebrow": "Support in Indonesia",
+    "heading": "If your company is in Indonesia, we are already next door",
+    "lede": "You get engineers in the same timezone, who speak your language, and can sit with you in the office. Questions get answered during your workday: fast, direct, and easy. Support from companies like OpenAI will never feel like that.",
+    "points": {
+      "0": {
+        "title": "Same timezone, same workday",
+        "text": "Replies during Indonesian office hours, not after your team has gone home."
+      },
+      "1": {
+        "title": "Bahasa Indonesia, no translation lag",
+        "text": "Talk to engineers who already understand your stack, your constraints, and your language."
+      },
+      "2": {
+        "title": "On-site when it matters",
+        "text": "When a rollout needs someone in the room, we can come to you. A global ticket portal cannot."
+      }
+    },
+    "cta": "Talk to the Jakarta team",
+    "image_alt": "Hyperjump engineers collaborating in a Jakarta office"
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "desc": "Straight answers about the OneAI plan. Need more detail? Email us. We reply quickly.",
+    "0": {
+      "question": "How many users does the plan include?",
+      "answer": "The standard OneAI plan covers up to 40 users. Need more seats or a phased rollout? Tell us your team size when you reach out."
+    },
+    "1": {
+      "question": "How are commercial terms structured?",
+      "answer": "Contact us to discuss commercial terms for your rollout, hosting requirements, and timeline."
+    },
+    "2": {
+      "question": "What is Zero Data Retention (ZDR)?",
+      "answer": "With ZDR, your company data is not retained for model training. You get AI productivity with a clear data-handling posture."
+    },
+    "3": {
+      "question": "What is included in the plan?",
+      "answer": "AI usage capacity, one team training/orientation session, and monthly usage reports, plus centralized access to current models and admin controls."
+    },
+    "4": {
+      "question": "Can you integrate with our internal systems or SSO?",
+      "answer": "Yes. Custom integrations (internal systems, dedicated SSO, and similar requirements) are scoped and priced separately after we understand your environment."
+    },
+    "5": {
+      "question": "What if we need more than 40 users?",
+      "answer": "Contact us. If you need more than 40 users, we will scope a plan that fits your team size."
+    },
+    "6": {
+      "question": "What happens if usage reaches its limit?",
+      "answer": "Your company can choose to suspend further requests or contact us to discuss additional capacity."
+    },
+    "7": {
+      "question": "Where is OneAI installed? Does our data stay with us?",
+      "answer": "Yes. OneAI is installed on your premises, so the platform, files, and usage data stay on your infrastructure. Hyperjump maintains the system. If you do not want to host it, we run OneAI on a dedicated isolated server for your company only, not shared with other customers."
+    }
+  },
+  "pdf_download": {
+    "eyebrow": "Take it to your boss",
+    "heading": "Building the business case?",
+    "desc": "Two files for internal sharing: a two-page PDF overview (product, capability comparison table, and local support), and a one-page Word memo you can send to your manager or leadership on why the company should consider OneAI.",
+    "cta": "Download PDF (2 pages)",
+    "file_name": "OneAI-overview.pdf"
+  },
+  "docx_download": {
+    "cta": "Download 1-page memo (Word)",
+    "file_name": "OneAI-leadership-memo.docx"
+  },
+  "close_cta": {
+    "heading": "Ready to unify AI for your company?",
+    "desc": "Tell us your team size and timeline. We will confirm fit, onboarding, and next steps.",
+    "cta": "Contact solution@hyperjump.tech"
+  },
+  "mailto": {
+    "subject": "OneAI plan inquiry: up to 40 users",
+    "body": "Hi Hyperjump team,\n\nI am interested in OneAI for my company.\n\nCompany:\nName:\nTeam size:\nPreferred start date:\n\nAdditional notes:\n"
+  },
+  "sticky_cta": "Get OneAI plan",
+  "nav": {
+    "capabilities": "Capabilities",
+    "comparison": "Comparison",
+    "support": "Support",
+    "faq": "FAQ"
+  }
+}

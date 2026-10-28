@@ -1,0 +1,121 @@
+import { test, expect } from "@playwright/test";
+
+import { getOneaiDocxPath } from "@/app/[lang]/(hyperjump)/oneai/get-oneai-docx-download";
+import { getOneaiPdfPath } from "@/app/[lang]/(hyperjump)/oneai/get-oneai-pdf-download";
+import {
+  oneaiComparisonHeadingPartsControl,
+  oneaiDocxDownloadCta,
+  oneaiPdfDownloadCta,
+  oneaiHeroHeading,
+  oneaiSupportHeading,
+  oneaiMailtoSubject,
+  oneaiMetaDescription,
+  oneaiMetaTitle
+} from "@/locales/.generated/strings";
+import { supportedLanguages } from "@/locales/.generated/types";
+
+import {
+  BASE_URL,
+  footerTest,
+  gotoAndWait,
+  headerTest,
+  imagesTest,
+  languageSwitcherTest,
+  metaTest,
+  responsiveTest
+} from "./shared-test";
+
+for (const locale of supportedLanguages) {
+  const path = `/${locale}`;
+
+  test.describe(`OneAI Home Page - ${locale.toUpperCase()}`, () => {
+    test.beforeEach(async ({ page }) => {
+      await gotoAndWait(page, `${BASE_URL}${path}`);
+    });
+
+    test.describe("Header", headerTest(locale));
+    test.describe("Language Switching", languageSwitcherTest(locale));
+    test.describe("Images", imagesTest());
+    test.describe("Footer", footerTest(locale));
+    test.describe("Meta title and description should exist", metaTest());
+    test.describe("Responsive Design", responsiveTest(path));
+
+    test("renders hero heading", async ({ page }) => {
+      await expect(page.locator("h1")).toHaveText(oneaiHeroHeading(locale));
+    });
+
+    test("meta description matches locale copy", async ({ page }) => {
+      const description = await page
+        .locator('meta[name="description"]')
+        .getAttribute("content");
+
+      expect(description).toBe(oneaiMetaDescription(locale));
+    });
+
+    test("page title includes localized OneAI meta title", async ({ page }) => {
+      const title = await page.title();
+      expect(title).toContain(oneaiMetaTitle(locale));
+    });
+
+    test("open graph image points to OneAI asset", async ({ page }) => {
+      const ogImage = await page
+        .locator('meta[property="og:image"]')
+        .getAttribute("content");
+
+      expect(ogImage).toContain("/images/oneai/og.png");
+    });
+
+    test("does not expose a price section", async ({ page }) => {
+      await expect(page.getByTestId("oneai-pricing")).toHaveCount(0);
+      await expect(page.getByTestId("oneai-price")).toHaveCount(0);
+    });
+
+    test("mailto CTA includes prefilled subject", async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+      const href = await page
+        .getByTestId("oneai-hero-cta")
+        .getAttribute("href");
+
+      expect(href).toContain("mailto:solution@hyperjump.tech");
+      expect(href).toContain(encodeURIComponent(oneaiMailtoSubject(locale)));
+    });
+
+    test("comparison section and table are visible", async ({ page }) => {
+      await expect(page.getByTestId("oneai-comparison-section")).toBeVisible();
+      await expect(page.getByTestId("oneai-comparison-table")).toBeVisible();
+      await expect(page.getByTestId("oneai-comparison-heading")).toBeVisible();
+      await expect(page.getByTestId("oneai-comparison-heading")).toContainText(
+        oneaiComparisonHeadingPartsControl(locale)
+      );
+    });
+
+    test("pdf and docx download links are available", async ({ page }) => {
+      const pdfLink = page.getByTestId("oneai-pdf-download");
+      const docxLink = page.getByTestId("oneai-docx-download");
+
+      await expect(page.getByTestId("oneai-downloads")).toBeVisible();
+      await expect(pdfLink).toHaveAttribute("href", getOneaiPdfPath(locale));
+      await expect(pdfLink).toHaveText(oneaiPdfDownloadCta(locale));
+      await expect(docxLink).toHaveAttribute("href", getOneaiDocxPath(locale));
+      await expect(docxLink).toHaveText(oneaiDocxDownloadCta(locale));
+    });
+
+    test("support section highlights local engineers", async ({ page }) => {
+      await expect(page.getByTestId("oneai-support-section")).toBeVisible();
+      await expect(page.getByTestId("oneai-support-heading")).toHaveText(
+        oneaiSupportHeading(locale)
+      );
+      await expect(page.getByTestId("oneai-support-cta")).toBeVisible();
+    });
+
+    test("faq section is visible", async ({ page }) => {
+      await expect(page.getByTestId("oneai-faq-section")).toBeVisible();
+      await expect(page.getByTestId("oneai-faq-accordion")).toBeVisible();
+    });
+
+    test("sticky mobile cta is visible on small viewport", async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await expect(page.getByTestId("oneai-sticky-cta")).toBeVisible();
+    });
+  });
+}
