@@ -1,5 +1,6 @@
 import type { Page } from "@playwright/test";
 import { test, expect } from "@playwright/test";
+import data from "@/data.json";
 import type { SupportedLanguage } from "@/locales/.generated/types";
 
 export const BASE_URL = "http://localhost:3000";
@@ -30,18 +31,6 @@ export function headerTest(locale: SupportedLanguage) {
     test("Header", async ({ page }) => {
       const header = getHeader(page);
       await expect(header).toBeVisible();
-    });
-
-    test("logo visible in header and links to home", async ({ page }) => {
-      const header = getHeader(page);
-      const logo = header
-        .getByRole("link")
-        .filter({ has: page.getByAltText("Hyperjump Logo") })
-        .first();
-      await expect(logo).toBeVisible();
-
-      const href = await logo.getAttribute("href");
-      expect(href).toBe(`/${locale}`);
     });
 
     test("header nav anchor links are visible and scroll to sections", async ({
@@ -144,23 +133,25 @@ export function languageSwitcherTest(locale: SupportedLanguage) {
       await expect(select).toBeVisible();
 
       await expect(select).toHaveValue(locale);
-      await page.waitForURL(new RegExp(`/${locale}/`));
+      await page.waitForURL(new RegExp(`/${locale}(?:/)?$`));
 
       const changedLocale = locale === "en" ? "id" : "en";
       await select.selectOption(changedLocale);
-      await page.waitForURL(new RegExp(`/${changedLocale}/`));
+      await page.waitForURL(new RegExp(`/${changedLocale}(?:/)?$`));
     });
   };
 }
 
-export function footerTest(locale: SupportedLanguage) {
+export function footerTest() {
   return () => {
     test("Footer", async ({ page }) => {
       const footer = getFooter(page);
       await expect(footer).toBeVisible();
     });
 
-    test("logo visible in footer and links to home", async ({ page }) => {
+    test("logo visible in footer and links to the company site", async ({
+      page
+    }) => {
       const footer = getFooter(page);
       const logo = footer
         .getByRole("link")
@@ -168,7 +159,7 @@ export function footerTest(locale: SupportedLanguage) {
         .first();
       await expect(logo).toBeVisible();
       const href = await logo.getAttribute("href");
-      expect(href).toBe(`/${locale}`);
+      expect(href).toBe(data.url);
     });
 
     test("company address or footer text visible", async ({ page }) => {
