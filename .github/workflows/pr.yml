@@ -1,0 +1,95 @@
+name: PR
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+concurrency:
+  group: pr-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Check formatting
+        run: bun run check-format
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run ESLint
+        run: bun run lint
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run unit tests
+        run: bun run test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install Puppeteer and serve
+        run: bun install puppeteer serve
+
+      - name: Build and export
+        run: bun run build
+
+      - name: Start static server and take screenshots
+        run: |
+          # Start the server in the background
+          bun run start &
+          # Wait for server to start
+          sleep 10
+          # Take screenshots
+          bun .github/scripts/take-screenshots.js
+          # Kill the server
+          kill $(lsof -t -i:3000) || true
+
+      - name: Upload screenshots as artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: preview-screenshots
+          path: screenshots/
