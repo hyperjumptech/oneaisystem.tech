@@ -27,7 +27,7 @@ env:
 
 jobs:
   deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Checkout repository
@@ -55,11 +55,19 @@ jobs:
       - name: Generate sitemap
         run: bun .github/scripts/generate-sitemap.js
 
+      # (Pertahankan langkah-langkah di atas sampai Generate sitemap & Create CNAME)
+
       - name: Create CNAME file
         run: echo "oneaisystem.tech" > out/CNAME
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          path: "./out"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
