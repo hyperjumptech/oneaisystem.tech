@@ -1,0 +1,29 @@
+{
+  "description": "Your partner in building reliable, modern software.",
+  "github": "https://github.com/hyperjumptech",
+  "socials": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/company/hyperjump",
+      "icon": "/images/footer/linkedin.svg"
+    },
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/hyperjumptech",
+      "icon": "/images/footer/github.svg"
+    },
+    {
+      "platform": "Medium",
+      "url": "https://medium.com/hyperjump-tech",
+      "icon": "/images/footer/medium.svg"
+    },
+    {
+      "platform": "Substack",
+      "url": "https://hyperjump.substack.com",
+      "icon": "/images/footer/substack.svg"
+    }
+  ],
+  "title": "Hyperjump Technology",
+  "url": "https://hyperjump.tech",
+  "email": "solution@hyperjump.tech"
+}

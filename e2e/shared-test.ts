@@ -1,0 +1,235 @@
+import type { Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
+import type { SupportedLanguage } from "@/locales/.generated/types";
+
+export const BASE_URL = "http://localhost:3000";
+
+export async function gotoAndWait(page: Page, url: string) {
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await expect(page).toHaveURL(
+    new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+  );
+}
+
+export function metaTest() {
+  return () => {
+    test("Meta title and description should exist", async ({ page }) => {
+      const title = await page.title();
+      const description = await page
+        .locator('meta[name="description"]')
+        .getAttribute("content");
+
+      expect(title.length).toBeGreaterThan(10);
+      expect(description?.length).toBeGreaterThan(20);
+    });
+  };
+}
+
+export function headerTest(locale: SupportedLanguage) {
+  return () => {
+    test("Header", async ({ page }) => {
+      const header = getHeader(page);
+      await expect(header).toBeVisible();
+    });
+
+    test("logo visible in header and links to home", async ({ page }) => {
+      const header = getHeader(page);
+      const logo = header
+        .getByRole("link")
+        .filter({ has: page.getByAltText("Hyperjump Logo") })
+        .first();
+      await expect(logo).toBeVisible();
+
+      const href = await logo.getAttribute("href");
+      expect(href).toBe(`/${locale}`);
+    });
+
+    test("header nav anchor links are visible and scroll to sections", async ({
+      page
+    }) => {
+      const header = getHeader(page);
+      await expect(header).toBeVisible();
+
+      const expected = expectedMenuPaths(locale);
+      for (const href of expected) {
+        await expect(header.locator(`a[href='${href}']`).first()).toBeVisible();
+      }
+
+      const firstHref = expected[0];
+      const firstHash = firstHref.split("#")[1];
+      await header.locator(`a[href='${firstHref}']`).first().click();
+      await page.waitForURL(new RegExp(`#${firstHash}$`));
+    });
+  };
+}
+
+function getHeader(page: Page) {
+  return page.locator("header, nav").first();
+}
+
+function expectedMenuPaths(locale: SupportedLanguage) {
+  return [
+    `/${locale}#capabilities`,
+    `/${locale}#comparison`,
+    `/${locale}#support`,
+    `/${locale}#faqs`
+  ];
+}
+
+export function imagesTest() {
+  return () => {
+    test("all images load without errors", async ({ page }) => {
+      await expectAllImagesLoaded(page);
+    });
+  };
+}
+
+async function expectAllImagesLoaded(page: Page) {
+  // Scroll to bottom to trigger lazy-loaded images
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForLoadState("networkidle");
+  const main = page.locator("main");
+  const images = main.locator('img, image, [style*="background-image"]');
+  const count = await images.count();
+
+  if (count === 0) {
+    return;
+  }
+
+  for (let i = 0; i < count; i++) {
+    const el = images.nth(i);
+    const { tag, isAnimated } = await el.evaluate((n: any) => {
+      const tag = n.tagName.toLowerCase();
+      const isAnimated = !!n.closest(".marquee");
+      return { tag, isAnimated };
+    });
+
+    if (tag === "img" || tag === "image") {
+      if (!isAnimated) {
+        await el.scrollIntoViewIfNeeded();
+      }
+
+      await expect(el, `Image #${i} not visible`).toBeVisible();
+
+      await expect
+        .poll(
+          () =>
+            el.evaluate((img: any) => {
+              const src =
+                img.currentSrc || img.src || img.href?.baseVal || "(none)";
+              const isSvgFile = typeof src === "string" && src.endsWith(".svg");
+              const rect = img.getBoundingClientRect();
+              const hasLayoutSize = rect.width > 0 && rect.height > 0;
+              const hasRasterSize =
+                (img.naturalWidth ?? 0) > 0 && (img.naturalHeight ?? 0) > 0;
+
+              return hasRasterSize || (isSvgFile && hasLayoutSize);
+            }),
+          {
+            message:
+              "Image did not finish loading after it entered the viewport",
+            timeout: 10_000
+          }
+        )
+        .toBeTruthy();
+    }
+  }
+}
+
+export function languageSwitcherTest(locale: SupportedLanguage) {
+  return () => {
+    test("switch language to the other locale and back", async ({ page }) => {
+      const footer = getFooter(page);
+      const select = footer.getByRole("combobox");
+      await expect(select).toBeVisible();
+
+      await expect(select).toHaveValue(locale);
+      await page.waitForURL(new RegExp(`/${locale}/`));
+
+      const changedLocale = locale === "en" ? "id" : "en";
+      await select.selectOption(changedLocale);
+      await page.waitForURL(new RegExp(`/${changedLocale}/`));
+    });
+  };
+}
+
+export function footerTest(locale: SupportedLanguage) {
+  return () => {
+    test("Footer", async ({ page }) => {
+      const footer = getFooter(page);
+      await expect(footer).toBeVisible();
+    });
+
+    test("logo visible in footer and links to home", async ({ page }) => {
+      const footer = getFooter(page);
+      const logo = footer
+        .getByRole("link")
+        .filter({ has: page.getByAltText("Hyperjump Logo") })
+        .first();
+      await expect(logo).toBeVisible();
+      const href = await logo.getAttribute("href");
+      expect(href).toBe(`/${locale}`);
+    });
+
+    test("company address or footer text visible", async ({ page }) => {
+      const footer = getFooter(page);
+      await expect(footer).toBeVisible();
+      await expect(footer.locator("p").first()).toBeVisible();
+    });
+
+    test("footer links and social icons are visible and valid", async ({
+      page
+    }) => {
+      const footer = getFooter(page);
+      await expect(footer).toBeVisible();
+
+      const footerLinks = footer.getByRole("link");
+      await expect(footerLinks.first()).toBeVisible();
+
+      // Ensure each link has href
+      const count = await footerLinks.count();
+      for (let i = 0; i < count; i++) {
+        const link = footerLinks.nth(i);
+        const href = await link.getAttribute("href");
+        expect(href, "footer link should have href").toBeTruthy();
+      }
+    });
+  };
+}
+
+function getFooter(page: Page) {
+  return page.getByRole("contentinfo");
+}
+
+const VIEWPORTS = [
+  { name: "mobile", size: { width: 360, height: 740 } },
+  { name: "tablet", size: { width: 820, height: 1180 } },
+  { name: "desktop", size: { width: 1280, height: 800 } },
+  { name: "large", size: { width: 1536, height: 960 } }
+] as const;
+
+export function responsiveTest(path: string) {
+  return () => {
+    for (const { name, size } of VIEWPORTS) {
+      test(`layout renders correctly at ${name} (${size.width}x${size.height})`, async ({
+        browser
+      }) => {
+        const context = await browser.newContext({
+          viewport: size
+        });
+        const page = await context.newPage();
+        await page.goto(`${BASE_URL}${path}`, {
+          waitUntil: "domcontentloaded"
+        });
+
+        const header = getHeader(page);
+        await expect(header).toBeVisible();
+
+        const footer = getFooter(page);
+        await expect(footer).toBeVisible();
+
+        await context.close();
+      });
+    }
+  };
+}

@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "title": "OneAI: Platform AI Enterprise Terpadu | Hyperjump",
+    "description": "Satu platform AI yang terkendali untuk semua tim di perusahaan. On-premise atau hosting terisolasi, satu anggaran, Zero Data Retention, plus akses model terbaru untuk hingga 40 pengguna."
+  },
+  "hero": {
+    "eyebrow": "AI enterprise dalam satu platform",
+    "heading": "OneAI",
+    "lede": "Satu workspace milik perusahaan Anda, dengan model yang tim sudah mau pakai: OpenAI, Claude, Gemini, DeepSeek, dan lainnya. Berjalan hanya untuk Anda, di server Anda atau terisolasi di server kami.",
+    "proofs": {
+      "0": "Dashboard terpusat",
+      "1": "Satu anggaran untuk semua",
+      "2": "Model terbaru begitu rilis",
+      "3": "On-premise, atau hosting terisolasi"
+    },
+    "cta": "Minta penawaran OneAI",
+    "visual": {
+      "chat_label": "Workspace AI untuk tim",
+      "admin_label": "Dashboard admin terpusat"
+    }
+  },
+  "pillars": {
+    "label": "Alasan tim memilih OneAI",
+    "0": {
+      "kicker": "01 · Kontrol",
+      "title": "Adopsi AI yang terpusat",
+      "text": "Dipasang langsung di server Anda, jadi data perusahaan tidak ke mana-mana. Perawatannya kami yang tangani. Tidak mau repot hosting sendiri? Kami siapkan instance OneAI terisolasi khusus untuk perusahaan Anda. Dengan ZDR (Zero Data Retention), data Anda tidak dipakai untuk melatih model."
+    },
+    "1": {
+      "kicker": "02 · Anggaran",
+      "title": "Satu tagihan untuk semua",
+      "text": "Cukup bayar sekali sebulan untuk seluruh karyawan. Tetapkan batas per tim atau bahkan per pengguna, tanpa pusing mengurus <i>allowance</i> AI perorangan yang sulit dilacak."
+    },
+    "2": {
+      "kicker": "03 · Kapasitas",
+      "title": "Model terbaru, tanpa menunggu",
+      "text": "Pakai OpenAI, Claude, Gemini, DeepSeek, dan model lain begitu tersedia. Admin yang menentukan model mana yang bisa diakses tiap tim."
+    }
+  },
+  "capabilities": {
+    "label": "Yang bisa dikerjakan tim Anda",
+    "0": {
+      "title": "Tanya file",
+      "text": "Unggah file di chat, pilih dokumennya, lalu tanya. Lanjutkan di percakapan yang sama."
+    },
+    "1": {
+      "title": "Pengetahuan bersama",
+      "text": "Agen VolunteerNow Helpdesk menjawab dari satu basis pengetahuan. Tidak perlu unggah ulang per orang."
+    },
+    "2": {
+      "title": "Buat/Edit Dokumen",
+      "text": "Word, PowerPoint, Excel, atau PDF. Tulis brief-nya, lalu unduh filenya."
+    },
+    "3": {
+      "title": "Jalankan kode",
+      "text": "Python atau JavaScript untuk scraping, bukti konsep website, atau grafik. Anda bisa meninjau apa yang dijalankan."
+    },
+    "4": {
+      "title": "Pencarian web",
+      "text": "Nyalakan pencarian web kalau jawaban butuh internet. Kalau mati, model tetap di batas pengetahuannya."
+    },
+    "5": {
+      "title": "Penanganan PII",
+      "text": "NIK, email, dan data sensitif lain. Deteksi, samarkan, atau blokir pesannya."
+    },
+    "6": {
+      "title": "Anggaran",
+      "text": "Batas per penyedia, virtual key, model, organisasi, tim, atau pengguna. Batasi biaya, token, atau jumlah permintaan."
+    },
+    "7": {
+      "title": "Multiple Providers",
+      "text": "Sambungkan penyedia yang sudah Anda pakai. Semua orang bekerja di satu workspace."
+    }
+  },
+  "comparison": {
+    "eyebrow": "Kenapa kursi ChatGPT itu produk yang berbeda",
+    "heading_parts": {
+      "before_highlights": "Untuk tim kecil, kursi ChatGPT memang lebih murah. Pilih OneAI kalau Anda butuh ",
+      "control": "kontrol",
+      "after_control": ", ",
+      "multiple_models": "banyak model",
+      "after_multiple_models": ", dan ",
+      "one_budget": "satu anggaran",
+      "after_one_budget": " lintas penyedia, bukan sekadar chat murah."
+    },
+    "lede": "Keberatan yang wajar: \"Kan bisa kasih <i>allowance</i> ke karyawan, atau langsung beli ChatGPT Business.\" Masuk akal, apalagi kalau timnya kecil dan cuma butuh chat. ChatGPT Business memang sudah mencakup pemakaian model, pengetahuan perusahaan, file, kode, sampai kontrol admin. Tapi OneAI produk yang berbeda: akses multi-model, hosting on-premise atau terisolasi, dan satu anggaran lintas penyedia.",
+    "not_for_you": {
+      "kicker": "Belum untuk Anda jika",
+      "title": "Tim di bawah 20 orang yang cukup pakai ChatGPT",
+      "text": "Untuk tim sekecil itu, ChatGPT Plus atau Business biasanya sudah cukup dan lebih hemat. OneAI memang bukan untuk menggantikan langganan pribadi di skala ini."
+    },
+    "good_fit": {
+      "kicker": "Cocok jika",
+      "title": "20-40 orang yang butuh satu platform, bukan 20-40 langganan",
+      "text": "Satu platform untuk hingga 40 pengguna, dengan satu anggaran lintas penyedia model, hosting on-premise atau terisolasi, akses multi-model, dan implementasi di tempat Anda. Pilih platform saat Anda membutuhkan kontrol yang lebih dari sekadar langganan chat."
+    },
+    "table_label": "Perbandingan kemampuan",
+    "advantage_price_badge": "Harga terbaik",
+    "advantage_included_badge": "Termasuk",
+    "columns": {
+      "feature": "Fitur",
+      "stipend": "<i>Allowance</i> individu",
+      "chatgpt": "ChatGPT Business",
+      "copilot": "Microsoft 365 Copilot",
+      "oneai": "OneAI"
+    },
+    "rows": {
+      "0": {
+        "feature": "Kecocokan penerapan",
+        "stipend": "Akun perorangan",
+        "chatgpt": "Workspace vendor",
+        "copilot": "Workspace Microsoft",
+        "oneai": "Platform AI perusahaan"
+      },
+      "1": {
+        "feature": "Tata kelola",
+        "stipend": "Dikelola karyawan",
+        "chatgpt": "Kontrol satu vendor",
+        "copilot": "Kontrol Microsoft",
+        "oneai": "Kontrol lintas penyedia"
+      },
+      "2": {
+        "feature": "Anggaran pemakaian lintas penyedia",
+        "stipend": "Tidak",
+        "chatgpt": "Pemakaian ChatGPT termasuk",
+        "copilot": "Tidak · biaya tambahan flat",
+        "oneai": "Satu anggaran lintas penyedia"
+      },
+      "3": {
+        "feature": "Satu anggaran lintas penyedia",
+        "stipend": "Tidak",
+        "chatgpt": "Hanya ChatGPT",
+        "copilot": "Tidak · sakelar per penyedia",
+        "oneai": "Ya"
+      },
+      "4": {
+        "feature": "Satu tagihan & laporan pemakaian",
+        "stipend": "Tidak",
+        "chatgpt": "Ya · hanya ChatGPT",
+        "copilot": "Ya · hanya Microsoft",
+        "oneai": "Ya · semua model"
+      },
+      "5": {
+        "feature": "Jaminan dana benar-benar untuk AI",
+        "stipend": "Tidak",
+        "chatgpt": "Ya · di dalam ChatGPT",
+        "copilot": "Butuh paket M365",
+        "oneai": "Ya"
+      },
+      "6": {
+        "feature": "Admin pilih model yang tersedia",
+        "stipend": "Tidak",
+        "chatgpt": "Hanya model OpenAI",
+        "copilot": "Ya · Microsoft + Anthropic + OpenAI",
+        "oneai": "Ya · lintas penyedia"
+      },
+      "7": {
+        "feature": "Multi-model, bukan satu merek",
+        "stipend": "Tergantung individu",
+        "chatgpt": "Tidak · OpenAI saja",
+        "copilot": "Ya · Microsoft, Anthropic, OpenAI",
+        "oneai": "Ya"
+      },
+      "8": {
+        "feature": "Zero Data Retention (ZDR)",
+        "stipend": "Tidak",
+        "chatgpt": "Default: tanpa training · bukan ZDR",
+        "copilot": "Tidak · menyimpan riwayat interaksi",
+        "oneai": "Ya"
+      },
+      "9": {
+        "feature": "Pengetahuan internal, file kantor, kode",
+        "stipend": "Tidak",
+        "chatgpt": "Ya · ChatGPT",
+        "copilot": "Ya · Word/Excel/PPT/Teams",
+        "oneai": "Ya · semua model"
+      },
+      "10": {
+        "feature": "On-premise atau instance terisolasi",
+        "stipend": "Tidak",
+        "chatgpt": "Tidak · cloud vendor",
+        "copilot": "Tidak · cloud saja",
+        "oneai": "Ya"
+      }
+    },
+    "assumptions": "Catatan kemampuan: ketersediaan produk dan ketentuannya dapat berubah. Hubungi masing-masing penyedia untuk ketentuan komersial terkini.",
+    "why_section": {
+      "label": "Kenapa OneAI",
+      "heading": "Satu platform utuh, bukan solusi tambal sulam",
+      "desc": "<i>Allowance</i> lemah di sisi kontrol. ChatGPT Business adalah kursi vendor tunggal yang solid. Sementara OneAI adalah platformnya, untuk Anda yang butuh banyak model, hosting terisolasi atau on-premise, dan satu anggaran lintas penyedia."
+    },
+    "why": {
+      "0": {
+        "title": "<i>Allowance</i> sering tidak berujung jadi AI",
+        "text": "Uang yang sudah masuk rekening karyawan bisa dipakai untuk apa saja. Tidak ada laporan pemakaian model, tidak ada jejak audit, dan tidak ada cara memastikan kebijakan perusahaan dipatuhi. Ujung-ujungnya Anda <strong>membayar kapasitas yang tidak bisa Anda pantau.</strong>"
+      },
+      "1": {
+        "title": "Kursi bukan produknya",
+        "text": "Intinya adalah <strong>satu platform lintas vendor</strong>, bukan sekadar chat OpenAI yang lebih murah."
+      },
+      "2": {
+        "title": "ChatGPT sudah punya pengetahuan, file, dan kode",
+        "text": "Pengetahuan perusahaan, konektor, file kantor, kode, SSO, sampai kontrol admin sudah tersedia di ChatGPT Business. OneAI melengkapinya dengan pilihan multi-model, hosting on-premise atau terisolasi, satu anggaran lintas penyedia, dan implementasi di tempat Anda. Ini bukan berarti fitur-fitur tadi harus dibeli terpisah."
+      }
+    }
+  },
+  "support": {
+    "eyebrow": "Support di Indonesia",
+    "heading": "Cepat dan gampang, karena kami di Indonesia juga",
+    "lede": "Kalau ada yang macet, Anda tidak antre tiket ke San Francisco. Engineer Hyperjump ada di zona waktu Anda, bicara bahasa Anda, dan bisa datang ke kantor Anda. Support dari perusahaan seperti OpenAI tidak akan seperti itu.",
+    "points": {
+      "0": {
+        "title": "Zona waktu yang sama",
+        "text": "Dibalas di jam kerja Indonesia, bukan setelah tim Anda pulang."
+      },
+      "1": {
+        "title": "Bahasa Indonesia, tanpa bolak-balik",
+        "text": "Bicara langsung dengan engineer yang sudah paham stack, kendala, dan bahasa Anda."
+      },
+      "2": {
+        "title": "Datang ke kantor kalau perlu",
+        "text": "Kalau rollout butuh orang di ruangan, kami bisa datang. Portal tiket global tidak bisa."
+      }
+    },
+    "cta": "Ngobrol dengan tim Jakarta",
+    "image_alt": "Engineer Hyperjump sedang berkolaborasi di kantor Jakarta"
+  },
+  "faq": {
+    "heading": "Pertanyaan yang sering diajukan",
+    "desc": "Jawaban ringkas seputar paket OneAI. Butuh detail lebih lanjut? Kirim email ke kami, kami balas dengan cepat.",
+    "0": {
+      "question": "Berapa jumlah pengguna dalam paket ini?",
+      "answer": "Paket standar OneAI mencakup hingga 40 pengguna. Butuh lebih banyak seat atau penerapan bertahap? Cukup sebutkan ukuran tim Anda saat menghubungi kami."
+    },
+    "1": {
+      "question": "Bagaimana struktur ketentuan komersialnya?",
+      "answer": "Hubungi kami untuk membahas ketentuan komersial berdasarkan kebutuhan rollout, hosting, dan target waktu Anda."
+    },
+    "2": {
+      "question": "Apa itu Zero Data Retention (ZDR)?",
+      "answer": "Dengan ZDR, data perusahaan Anda tidak disimpan untuk melatih model. Anda tetap mendapat produktivitas AI, dengan kebijakan penanganan data yang jelas."
+    },
+    "3": {
+      "question": "Apa saja yang termasuk dalam paket?",
+      "answer": "Kapasitas pemakaian AI, satu sesi training/orientasi tim, dan laporan pemakaian bulanan, plus akses terpusat ke model terkini dan kontrol admin."
+    },
+    "4": {
+      "question": "Bisakah diintegrasikan dengan sistem internal atau SSO kami?",
+      "answer": "Bisa. Integrasi kustom (sistem internal, SSO khusus, dan kebutuhan sejenis) kami bahas dan hitung terpisah setelah memahami lingkungan Anda."
+    },
+    "5": {
+      "question": "Bagaimana jika kami butuh lebih dari 40 pengguna?",
+      "answer": "Hubungi kami saja. Kalau kebutuhan Anda lebih dari 40 pengguna, kami akan menyusun paket yang pas dengan ukuran tim Anda."
+    },
+    "6": {
+      "question": "Apa yang terjadi jika pemakaian mencapai batasnya?",
+      "answer": "Perusahaan Anda dapat memilih menghentikan permintaan berikutnya atau menghubungi kami untuk membahas kapasitas tambahan."
+    },
+    "7": {
+      "question": "Di mana OneAI dipasang? Apakah data tetap di perusahaan kami?",
+      "answer": "Ya. OneAI dipasang di infrastruktur Anda, jadi platform, berkas, dan data pemakaian tetap berada di lingkungan Anda. Sistemnya dirawat oleh Hyperjump. Kalau Anda tidak mau hosting sendiri, kami jalankan OneAI di server terisolasi khusus perusahaan Anda, tidak dibagi dengan pelanggan lain."
+    }
+  },
+  "pdf_download": {
+    "eyebrow": "Bawa ke atasan Anda",
+    "heading": "Sedang menyiapkan business case?",
+    "desc": "Dua berkas siap pakai untuk dibagikan ke internal: ringkasan PDF dua halaman (produk, tabel perbandingan kemampuan, dan support lokal), plus memo Word satu halaman yang bisa Anda sunting untuk dikirim ke manajer atau pimpinan.",
+    "cta": "Unduh PDF (2 halaman)",
+    "file_name": "OneAI-ringkasan.pdf"
+  },
+  "docx_download": {
+    "cta": "Unduh memo 1 halaman (Word)",
+    "file_name": "OneAI-memo-pimpinan.docx"
+  },
+  "close_cta": {
+    "heading": "Siap mengadopsi AI secara terpadu di perusahaan Anda?",
+    "desc": "Ceritakan ukuran tim dan target waktu Anda. Kami akan bantu pastikan kecocokannya, proses onboarding, hingga langkah selanjutnya.",
+    "cta": "Hubungi solution@hyperjump.tech"
+  },
+  "mailto": {
+    "subject": "Minat paket OneAI: hingga 40 pengguna",
+    "body": "Halo tim Hyperjump,\n\nSaya tertarik dengan OneAI untuk perusahaan saya.\n\nPerusahaan:\nNama:\nUkuran tim:\nPerkiraan tanggal mulai:\n\nCatatan tambahan:\n"
+  },
+  "sticky_cta": "Dapatkan paket OneAI",
+  "nav": {
+    "capabilities": "Kapabilitas",
+    "comparison": "Perbandingan",
+    "support": "Dukungan",
+    "faq": "FAQ"
+  }
+}
