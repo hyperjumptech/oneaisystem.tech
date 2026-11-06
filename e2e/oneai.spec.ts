@@ -70,6 +70,14 @@ for (const locale of supportedLanguages) {
       await expect(page.getByTestId("oneai-price")).toHaveCount(0);
     });
 
+    test("does not show the HyperBot chat launcher", async ({ page }) => {
+      await expect(page.getByText("Ask HyperBot")).toHaveCount(0);
+      await expect(page.getByText("Tanya HyperBot")).toHaveCount(0);
+      await expect(
+        page.getByPlaceholder(/Ask me about services|Tanyakan kepada saya/)
+      ).toHaveCount(0);
+    });
+
     test("mailto CTA includes prefilled subject", async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       const href = await page
