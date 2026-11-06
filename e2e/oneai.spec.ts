@@ -62,7 +62,13 @@ for (const locale of supportedLanguages) {
         .locator('meta[property="og:image"]')
         .getAttribute("content");
 
-      expect(ogImage).toContain("/images/oneai/og.png");
+      expect(ogImage).toBe("https://oneaisystem.tech/images/oneai/og.png");
+
+      const ogUrl = await page
+        .locator('meta[property="og:url"]')
+        .getAttribute("content");
+
+      expect(ogUrl).toBe(`https://oneaisystem.tech/${locale}`);
     });
 
     test("does not expose a price section", async ({ page }) => {
