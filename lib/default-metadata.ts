@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import data from "@/data.json";
 import { supportedLanguages } from "@/locales/.generated/types";
 
-const { description, title, url } = data;
-const DEFAULT_IMAGE = `${url}/images/hyperjump-og.png`;
+const { description, siteUrl, title } = data;
+const DEFAULT_IMAGE = `${siteUrl}/images/hyperjump-og.png`;
 export const DEFAULT_OPENGRAPH: Metadata = {
-  metadataBase: new URL(url),
+  metadataBase: new URL(siteUrl),
   title,
   description,
   authors: [
@@ -24,7 +24,7 @@ export const DEFAULT_OPENGRAPH: Metadata = {
     title,
     description,
     type: "website",
-    url,
+    url: siteUrl,
     siteName: title,
     images: {
       url: DEFAULT_IMAGE,
@@ -40,10 +40,10 @@ export const DEFAULT_OPENGRAPH: Metadata = {
     images: DEFAULT_IMAGE
   },
   alternates: {
-    canonical: `${url}/`,
+    canonical: `${siteUrl}/`,
     languages: supportedLanguages.reduce(
       (acc, l) => {
-        acc[l] = `${url}/${l}`;
+        acc[l] = `${siteUrl}/${l}`;
         return acc;
       },
       {} as Record<string, string>

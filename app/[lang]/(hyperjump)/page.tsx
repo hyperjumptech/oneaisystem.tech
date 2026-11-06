@@ -80,8 +80,8 @@ import { OneaiHeroVisual } from "./oneai/oneai-hero-visual";
 import { OneaiStickyCta } from "./oneai/oneai-sticky-cta";
 import { OneaiSupportSection } from "./oneai/oneai-support-section";
 
-const { url } = data;
-const OG_IMAGE = `${url}${ONEAI_OG_IMAGE_PATH}`;
+const { siteUrl } = data;
+const OG_IMAGE = `${siteUrl}${ONEAI_OG_IMAGE_PATH}`;
 
 type LangProps = { lang: SupportedLanguage };
 type HomePageProps = { params: Promise<LangProps> };
@@ -97,7 +97,7 @@ export async function generateMetadata({
   params
 }: HomePageProps): Promise<Metadata> {
   const { lang } = await params;
-  const pageUrl = `${url}/${lang}`;
+  const pageUrl = `${siteUrl}/${lang}`;
   const pageTitle = oneaiMetaTitle(lang);
   const pageDescription = oneaiMetaDescription(lang);
 
@@ -108,7 +108,7 @@ export async function generateMetadata({
       canonical: pageUrl,
       languages: supportedLanguages.reduce(
         (acc, locale) => {
-          acc[locale] = `${url}/${locale}`;
+          acc[locale] = `${siteUrl}/${locale}`;
           return acc;
         },
         {} as Record<string, string>
@@ -141,8 +141,8 @@ export default async function HomePage({ params }: HomePageProps) {
     subject: oneaiMailtoSubject(lang),
     body: oneaiMailtoBody(lang)
   });
-  const pageUrl = `${url}/${lang}`;
-  const jsonLd = getOneaiJsonLd({ lang, pageUrl, siteUrl: url });
+  const pageUrl = `${siteUrl}/${lang}`;
+  const jsonLd = getOneaiJsonLd({ lang, pageUrl, siteUrl });
   const faqs = getDefaultOneaiFaqs(lang);
   const heroProofs = [
     oneaiHeroProofs0(lang),

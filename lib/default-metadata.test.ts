@@ -4,7 +4,7 @@ import data from "@/data.json";
 
 import { DEFAULT_OPENGRAPH, dynamicOpengraph } from "./default-metadata";
 
-const { title, url } = data;
+const { siteUrl, title } = data;
 
 describe("dynamicOpengraph", () => {
   it("uses the default OG image when no override is provided", () => {
@@ -16,13 +16,13 @@ describe("dynamicOpengraph", () => {
     expect(meta.title).toBe("Custom title");
     expect(meta.description).toBe("Custom description");
     expect(meta.openGraph?.images).toEqual({
-      url: `${url}/images/hyperjump-og.png`,
+      url: `${siteUrl}/images/hyperjump-og.png`,
       width: 1200,
       height: 630,
       alt: "Custom title"
     });
     expect(meta.twitter?.images).toEqual({
-      url: `${url}/images/hyperjump-og.png`,
+      url: `${siteUrl}/images/hyperjump-og.png`,
       width: 1200,
       height: 630,
       alt: "Custom title"
@@ -38,7 +38,7 @@ describe("dynamicOpengraph", () => {
 
   it("uses a custom image when provided", () => {
     const customImage = {
-      url: `${url}/images/oneai/og.png`,
+      url: `${siteUrl}/images/oneai/og.png`,
       width: 1200,
       height: 630,
       alt: "OneAI"
@@ -56,8 +56,8 @@ describe("dynamicOpengraph", () => {
 
   it("preserves page-specific alternates and openGraph fields", () => {
     const alternates = {
-      canonical: `${url}/en/oneai`,
-      languages: { en: `${url}/en/oneai`, id: `${url}/id/oneai` }
+      canonical: `${siteUrl}/en/oneai`,
+      languages: { en: `${siteUrl}/en/oneai`, id: `${siteUrl}/id/oneai` }
     };
 
     const meta = dynamicOpengraph({
@@ -65,13 +65,13 @@ describe("dynamicOpengraph", () => {
       description: "Enterprise AI",
       alternates,
       openGraph: {
-        url: `${url}/en/oneai`,
+        url: `${siteUrl}/en/oneai`,
         locale: "en_US"
       }
     });
 
     expect(meta.alternates).toEqual(alternates);
-    expect(meta.openGraph?.url).toBe(`${url}/en/oneai`);
+    expect(meta.openGraph?.url).toBe(`${siteUrl}/en/oneai`);
     expect(meta.openGraph?.locale).toBe("en_US");
   });
 });

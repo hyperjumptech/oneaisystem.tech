@@ -10,7 +10,7 @@ const {
   pathWithoutLocaleReducer
 } = require("./find-all-pages");
 
-const BASE_URL = "https://oneaisystem.tech";
+const { siteUrl: BASE_URL } = require("../../data.json");
 // Next.js export directory
 const OUTPUT_DIR = join(process.cwd(), "out");
 
