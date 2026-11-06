@@ -35,7 +35,7 @@ export function headerTest(locale: SupportedLanguage) {
 
     test("header logo is visible and links home", async ({ page }) => {
       const header = getHeader(page);
-      const logo = header.getByRole("link", { name: "Hyperjump Logo" });
+      const logo = header.getByRole("link", { name: "OneAI" });
 
       await expect(logo).toBeVisible();
       await expect(logo).toHaveAttribute("href", `/${locale}`);

@@ -155,11 +155,11 @@ function Logo({ isOpen }: { isOpen: boolean }) {
   if (isOpen) {
     return (
       <Image
-        src="/images/hyperjump-colored.png"
-        alt="Hyperjump Logo"
-        width={187}
-        height={32}
-        className="h-7 w-auto"
+        src="/images/oneai/logo-on-light.png"
+        alt="OneAI"
+        width={315}
+        height={110}
+        className="h-8 w-auto"
         priority
       />
     );
@@ -168,19 +168,19 @@ function Logo({ isOpen }: { isOpen: boolean }) {
   return (
     <>
       <Image
-        src="/images/hyperjump-white-colored.png"
-        alt="Hyperjump Logo"
-        width={187}
-        height={32}
-        className="h-7 w-auto group-data-[scroll=true]:hidden"
+        src="/images/oneai/logo-on-dark.png"
+        alt="OneAI"
+        width={315}
+        height={110}
+        className="h-8 w-auto group-data-[scroll=true]:hidden"
         priority
       />
       <Image
-        src="/images/hyperjump-colored.png"
-        alt="Hyperjump Logo"
-        width={187}
-        height={32}
-        className="hidden h-7 w-auto group-data-[scroll=true]:block"
+        src="/images/oneai/logo-on-light.png"
+        alt="OneAI"
+        width={315}
+        height={110}
+        className="hidden h-8 w-auto group-data-[scroll=true]:block"
       />
     </>
   );
