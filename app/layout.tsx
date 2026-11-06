@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang={supportedLanguages[0]}>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#1C1F2E" />
+        <meta name="theme-color" content="#041F55" />
         <link rel="icon" href="/icons/icon-192x192.png" />
         <meta
           name="format-detection"

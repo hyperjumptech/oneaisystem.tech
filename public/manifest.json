@@ -1,11 +1,11 @@
 {
-  "name": "Hyperjump",
-  "short_name": "Hyperjump",
-  "description": "Open source first. Cloud native. DevOps excellence.",
+  "name": "OneAI",
+  "short_name": "OneAI",
+  "description": "One controlled AI platform for your whole company. On-prem or isolated hosting, one budget, Zero Data Retention, and the latest models.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1C1F2E",
-  "theme_color": "#1C1F2E",
+  "background_color": "#041F55",
+  "theme_color": "#041F55",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
