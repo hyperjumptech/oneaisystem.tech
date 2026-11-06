@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, useState } from "react";
 
@@ -42,7 +43,13 @@ export default function Nav({ lang }: NavProps) {
           "group-data-[scroll=true]:border-b group-data-[scroll=true]:border-black/6 group-data-[scroll=true]:bg-white/95",
           isOpen && "border-b border-black/6 bg-white/95"
         )}>
-        <div className="mx-auto flex w-5xl items-center justify-end px-4 md:px-20 xl:px-0">
+        <div className="mx-auto flex w-5xl items-center justify-between px-4 md:px-20 xl:px-0">
+          <Link
+            href={`/${lang}`}
+            onClick={() => setIsOpen(false)}
+            className="inline-flex shrink-0 items-center">
+            <Logo isOpen={isOpen} />
+          </Link>
           <CenterNavItems>
             <NavigationMenu className="mx-8 xl:mx-0">
               <NavigationMenuList className="flex items-center gap-1">
@@ -141,5 +148,40 @@ function CenterNavItems({ children }: { children: React.ReactNode }) {
     <div className="hidden flex-1 items-center justify-end space-x-8 lg:flex">
       {children}
     </div>
+  );
+}
+
+function Logo({ isOpen }: { isOpen: boolean }) {
+  if (isOpen) {
+    return (
+      <Image
+        src="/images/hyperjump-colored.png"
+        alt="Hyperjump Logo"
+        width={187}
+        height={32}
+        className="h-7 w-auto"
+        priority
+      />
+    );
+  }
+
+  return (
+    <>
+      <Image
+        src="/images/hyperjump-white-colored.png"
+        alt="Hyperjump Logo"
+        width={187}
+        height={32}
+        className="h-7 w-auto group-data-[scroll=true]:hidden"
+        priority
+      />
+      <Image
+        src="/images/hyperjump-colored.png"
+        alt="Hyperjump Logo"
+        width={187}
+        height={32}
+        className="hidden h-7 w-auto group-data-[scroll=true]:block"
+      />
+    </>
   );
 }

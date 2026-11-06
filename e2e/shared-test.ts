@@ -33,6 +33,14 @@ export function headerTest(locale: SupportedLanguage) {
       await expect(header).toBeVisible();
     });
 
+    test("header logo is visible and links home", async ({ page }) => {
+      const header = getHeader(page);
+      const logo = header.getByRole("link", { name: "Hyperjump Logo" });
+
+      await expect(logo).toBeVisible();
+      await expect(logo).toHaveAttribute("href", `/${locale}`);
+    });
+
     test("header nav anchor links are visible and scroll to sections", async ({
       page
     }) => {
