@@ -165,8 +165,8 @@
     "assumptions": "Capability notes: product availability and terms may change. Contact each provider for current commercial terms.",
     "why_section": {
       "label": "Why OneAI",
-      "heading": "One platform beats three workarounds",
-      "desc": "Stipends fail at control. ChatGPT Business is a strong single-vendor seat. OneAI is the platform when you need multiple models, isolated or on-prem hosting, and one budget across providers."
+      "heading": "Employee allowance, ChatGPT, and Copilot",
+      "desc": "That first column is money you give an employee and hope they spend on AI. Often they don't, and you never see which model ran. ChatGPT Business is an OpenAI company account. Copilot is the Microsoft 365 version of that. OneAI is for the team that also needs Claude and Gemini. It runs on your servers, or on an instance that is only yours. You pay for every model from one budget."
     },
     "why": {
       "0": {

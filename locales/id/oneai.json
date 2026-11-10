@@ -165,8 +165,8 @@
     "assumptions": "Catatan kemampuan: ketersediaan produk dan ketentuannya dapat berubah. Hubungi masing-masing penyedia untuk ketentuan komersial terkini.",
     "why_section": {
       "label": "Kenapa OneAI",
-      "heading": "Satu platform utuh, bukan solusi tambal sulam",
-      "desc": "<i>Allowance</i> lemah di sisi kontrol. ChatGPT Business adalah kursi vendor tunggal yang solid. Sementara OneAI adalah platformnya, untuk Anda yang butuh banyak model, hosting terisolasi atau on-premise, dan satu anggaran lintas penyedia."
+      "heading": "Allowance, ChatGPT, dan Copilot",
+      "desc": "Kolom pertama itu uang yang Anda kasih ke karyawan, dengan harapan dipakai untuk AI. Sering kali tidak, dan Anda tidak pernah lihat model apa yang jalan. ChatGPT Business adalah akun perusahaan untuk OpenAI. Copilot adalah akun perusahaan di dalam Microsoft 365. OneAI untuk tim yang juga butuh Claude dan Gemini. Jalannya di server Anda, atau di instance yang cuma milik perusahaan Anda. Semua model dibayar dari satu anggaran."
     },
     "why": {
       "0": {
