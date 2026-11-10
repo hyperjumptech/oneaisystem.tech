@@ -73,28 +73,7 @@
     }
   },
   "comparison": {
-    "eyebrow": "Kenapa kursi ChatGPT itu produk yang berbeda",
-    "heading_parts": {
-      "before_highlights": "Untuk tim kecil, kursi ChatGPT memang lebih murah. Pilih OneAI kalau Anda butuh ",
-      "control": "kontrol",
-      "after_control": ", ",
-      "multiple_models": "banyak model",
-      "after_multiple_models": ", dan ",
-      "one_budget": "satu anggaran",
-      "after_one_budget": " lintas penyedia, bukan sekadar chat murah."
-    },
-    "lede": "Keberatan yang wajar: \"Kan bisa kasih <i>allowance</i> ke karyawan, atau langsung beli ChatGPT Business.\" Masuk akal, apalagi kalau timnya kecil dan cuma butuh chat. ChatGPT Business memang sudah mencakup pemakaian model, pengetahuan perusahaan, file, kode, sampai kontrol admin. Tapi OneAI produk yang berbeda: akses multi-model, hosting on-premise atau terisolasi, dan satu anggaran lintas penyedia.",
-    "not_for_you": {
-      "kicker": "Belum untuk Anda jika",
-      "title": "Tim di bawah 20 orang yang cukup pakai ChatGPT",
-      "text": "Untuk tim sekecil itu, ChatGPT Plus atau Business biasanya sudah cukup dan lebih hemat. OneAI memang bukan untuk menggantikan langganan pribadi di skala ini."
-    },
-    "good_fit": {
-      "kicker": "Cocok jika",
-      "title": "20-40 orang yang butuh satu platform, bukan 20-40 langganan",
-      "text": "Satu platform untuk hingga 40 pengguna, dengan satu anggaran lintas penyedia model, hosting on-premise atau terisolasi, akses multi-model, dan implementasi di tempat Anda. Pilih platform saat Anda membutuhkan kontrol yang lebih dari sekadar langganan chat."
-    },
-    "table_label": "Perbandingan kemampuan",
+    "table_label": "Perbandingan OneAI",
     "advantage_price_badge": "Harga terbaik",
     "advantage_included_badge": "Termasuk",
     "columns": {

@@ -9,8 +9,7 @@ import {
   oneaiComparisonColumnsCopilot,
   oneaiComparisonColumnsFeature,
   oneaiComparisonColumnsOneai,
-  oneaiComparisonColumnsStipend,
-  oneaiComparisonTableLabel
+  oneaiComparisonColumnsStipend
 } from "@/locales/.generated/strings";
 import { cn } from "@/lib/utils";
 
@@ -131,9 +130,6 @@ export function OneaiComparisonTable({ lang }: OneaiComparisonTableProps) {
 
   return (
     <SectionReveal delay={0.05}>
-      <p className="text-hyperjump-gray mb-4 text-xs font-bold tracking-[0.14em] uppercase">
-        {oneaiComparisonTableLabel(lang)}
-      </p>
       <div className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
         <table
           className="w-full min-w-[720px] border-collapse text-left text-sm"

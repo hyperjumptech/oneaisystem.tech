@@ -6,7 +6,7 @@ import {
   oneaiCapabilities7Text,
   oneaiCapabilities7Title,
   oneaiCapabilitiesLabel,
-  oneaiComparisonHeadingPartsControl,
+  oneaiComparisonTableLabel,
   oneaiDocxDownloadCta,
   oneaiPdfDownloadCta,
   oneaiHeroHeading,
@@ -116,9 +116,8 @@ for (const locale of supportedLanguages) {
     test("comparison section and table are visible", async ({ page }) => {
       await expect(page.getByTestId("oneai-comparison-section")).toBeVisible();
       await expect(page.getByTestId("oneai-comparison-table")).toBeVisible();
-      await expect(page.getByTestId("oneai-comparison-heading")).toBeVisible();
-      await expect(page.getByTestId("oneai-comparison-heading")).toContainText(
-        oneaiComparisonHeadingPartsControl(locale)
+      await expect(page.getByTestId("oneai-comparison-heading")).toHaveText(
+        oneaiComparisonTableLabel(locale)
       );
     });
 

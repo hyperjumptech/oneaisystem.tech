@@ -73,28 +73,7 @@
     }
   },
   "comparison": {
-    "eyebrow": "Why a ChatGPT seat is not the same product",
-    "heading_parts": {
-      "before_highlights": "ChatGPT seats cost less for small teams. Choose OneAI when you need ",
-      "control": "control",
-      "after_control": ", ",
-      "multiple_models": "multiple models",
-      "after_multiple_models": ", and ",
-      "one_budget": "one budget",
-      "after_one_budget": " across providers, not cheaper chat."
-    },
-    "lede": "A fair objection: \"We can give employees money, or buy ChatGPT Business.\" That makes sense for small teams with chat-only needs. ChatGPT Business already includes model usage, company knowledge, files, code, and admin controls. OneAI is a different product: multi-model access, on-prem or isolated hosting, and one budget across vendors.",
-    "not_for_you": {
-      "kicker": "Not for you if",
-      "title": "Fewer than 20 people with chat-only needs",
-      "text": "For that team size, ChatGPT Plus or Business is usually enough and cheaper. OneAI isn't meant to replace personal subscriptions at that scale."
-    },
-    "good_fit": {
-      "kicker": "Good fit if",
-      "title": "20-40 people who need one platform, not 20-40 subscriptions",
-      "text": "One platform for up to 40 users, with a shared budget across model providers, on-prem or isolated hosting, multi-model access, and local implementation. Choose the platform when you need control beyond a chat subscription."
-    },
-    "table_label": "Capability comparison",
+    "table_label": "How OneAI compares",
     "advantage_price_badge": "Best value",
     "advantage_included_badge": "Included",
     "columns": {
