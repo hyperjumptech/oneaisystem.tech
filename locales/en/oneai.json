@@ -45,7 +45,7 @@
     },
     "1": {
       "title": "Shared knowledge",
-      "text": "A VolunteerNow Helpdesk agent answers from one shared knowledge base. Nobody re-uploads the same files."
+      "text": "Upload files once, share them with the team, and tell the model to use that knowledge when it answers. Nobody uploads the same files again."
     },
     "2": {
       "title": "Create/Edit Documents",

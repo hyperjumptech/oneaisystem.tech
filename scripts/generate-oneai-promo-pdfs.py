@@ -60,7 +60,7 @@ EN = {
     "cap_label": "WHAT YOUR TEAM CAN DO",
     "caps": [
         ("Ask your files", "Upload in the chat, ask, and follow up in the same thread."),
-        ("Shared knowledge", "VolunteerNow Helpdesk uses one shared base. No re-upload per person."),
+        ("Shared knowledge", "Upload files once, share with the team, and tell the model to use them. No re-upload."),
         ("Create/Edit Documents", "Word, PowerPoint, Excel, or PDF. Type the brief, then download."),
         ("Run code", "Python or JavaScript for scraping, a site POC, or charts. Review what it ran."),
         ("Web search", "On for the live web. Off, and the model stays at its knowledge cutoff."),
@@ -154,7 +154,7 @@ ID = {
     "cap_label": "YANG BISA DIKERJAKAN TIM ANDA",
     "caps": [
         ("Tanya file", "Unggah di chat, tanya, lanjut di percakapan yang sama."),
-        ("Pengetahuan bersama", "Agen VolunteerNow Helpdesk, satu basis. Tanpa unggah ulang per orang."),
+        ("Pengetahuan bersama", "Unggah file sekali, bagikan ke tim, minta model memakainya. Tanpa unggah ulang."),
         ("Buat/Edit Dokumen", "Word, PowerPoint, Excel, atau PDF. Tulis brief, lalu unduh."),
         ("Jalankan kode", "Python atau JavaScript untuk scraping, POC website, atau grafik."),
         ("Pencarian web", "Nyala untuk web hidup. Mati, model tetap di batas pengetahuannya."),

@@ -71,7 +71,7 @@ EN = {
         ),
         (
             "Real capability",
-            "ask files, a VolunteerNow Helpdesk knowledge base, documents, code, web search, PII handling, budgets, and multiple providers in one workspace.",
+            "ask files, knowledge you upload once and share so the model can use it, documents, code, web search, PII handling, budgets, and multiple providers in one workspace.",
         ),
     ],
     "cost": (
@@ -147,7 +147,7 @@ ID = {
         ),
         (
             "Kapabilitas yang nyata",
-            "tanya file, basis VolunteerNow Helpdesk, dokumen, kode, pencarian web, penanganan PII, anggaran, dan multiple providers dalam satu workspace.",
+            "tanya file, pengetahuan yang diunggah sekali dan dibagikan agar model memakainya, dokumen, kode, pencarian web, penanganan PII, anggaran, dan multiple providers dalam satu workspace.",
         ),
     ],
     "cost": (
