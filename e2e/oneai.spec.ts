@@ -3,6 +3,9 @@ import { test, expect } from "@playwright/test";
 import { getOneaiDocxPath } from "@/app/[lang]/(hyperjump)/oneai/get-oneai-docx-download";
 import { getOneaiPdfPath } from "@/app/[lang]/(hyperjump)/oneai/get-oneai-pdf-download";
 import {
+  oneaiCapabilities8Text,
+  oneaiCapabilities8Title,
+  oneaiCapabilitiesLabel,
   oneaiComparisonHeadingPartsControl,
   oneaiDocxDownloadCta,
   oneaiPdfDownloadCta,
@@ -92,6 +95,22 @@ for (const locale of supportedLanguages) {
 
       expect(href).toContain("mailto:solution@hyperjump.tech");
       expect(href).toContain(encodeURIComponent(oneaiMailtoSubject(locale)));
+    });
+
+    test("capabilities include creating a personal or shared agent", async ({
+      page
+    }) => {
+      const section = page.locator("#capabilities");
+
+      await expect(
+        section.getByRole("heading", { name: oneaiCapabilitiesLabel(locale) })
+      ).toBeVisible();
+      await expect(
+        section.getByRole("heading", { name: oneaiCapabilities8Title(locale) })
+      ).toBeVisible();
+      await expect(
+        section.getByText(oneaiCapabilities8Text(locale))
+      ).toBeVisible();
     });
 
     test("comparison section and table are visible", async ({ page }) => {
