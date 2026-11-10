@@ -65,7 +65,7 @@
     },
     "6": {
       "title": "Anggaran",
-      "text": "Batas per penyedia, virtual key, model, organisasi, tim, atau pengguna. Batasi biaya, token, atau jumlah permintaan."
+      "text": "Batas per virtual key, model, organisasi, tim, atau pengguna. Batasi biaya, token, atau jumlah permintaan."
     },
     "7": {
       "title": "Buat agen",

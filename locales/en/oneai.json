@@ -65,7 +65,7 @@
     },
     "6": {
       "title": "Budget",
-      "text": "Limits by provider, virtual key, model, organization, team, or user. Cap by cost, tokens, or requests."
+      "text": "Limits by virtual key, model, organization, team, or user. Cap by cost, tokens, or requests."
     },
     "7": {
       "title": "Create agents",
