@@ -15,9 +15,7 @@ import {
   oneaiCapabilities6Text,
   oneaiCapabilities6Title,
   oneaiCapabilities7Text,
-  oneaiCapabilities7Title,
-  oneaiCapabilities8Text,
-  oneaiCapabilities8Title
+  oneaiCapabilities7Title
 } from "@/locales/.generated/strings";
 
 export type OneaiCapability = {
@@ -44,8 +42,7 @@ const DEFAULT_CAPABILITY_LOADERS: CapabilityLoader[] = [
   { title: oneaiCapabilities4Title, text: oneaiCapabilities4Text },
   { title: oneaiCapabilities5Title, text: oneaiCapabilities5Text },
   { title: oneaiCapabilities6Title, text: oneaiCapabilities6Text },
-  { title: oneaiCapabilities7Title, text: oneaiCapabilities7Text },
-  { title: oneaiCapabilities8Title, text: oneaiCapabilities8Text }
+  { title: oneaiCapabilities7Title, text: oneaiCapabilities7Text }
 ];
 
 /**

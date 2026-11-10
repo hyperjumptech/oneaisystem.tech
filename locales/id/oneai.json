@@ -68,10 +68,6 @@
       "text": "Batas per penyedia, virtual key, model, organisasi, tim, atau pengguna. Batasi biaya, token, atau jumlah permintaan."
     },
     "7": {
-      "title": "Multiple Providers",
-      "text": "Sambungkan penyedia yang sudah Anda pakai. Semua orang bekerja di satu workspace."
-    },
-    "8": {
       "title": "Buat agen",
       "text": "Pribadi, atau dibagikan ke tim. Pilih model, atur instruksi sistem, izinkan alat dan kapabilitas, lalu sambungkan pengetahuan. Atau buat lewat chat dengan model di OneAI."
     }

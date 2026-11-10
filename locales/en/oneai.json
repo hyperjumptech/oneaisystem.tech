@@ -68,10 +68,6 @@
       "text": "Limits by provider, virtual key, model, organization, team, or user. Cap by cost, tokens, or requests."
     },
     "7": {
-      "title": "Multiple Providers",
-      "text": "Connect the providers you already use. Everyone works in one workspace."
-    },
-    "8": {
       "title": "Create agents",
       "text": "Personal, or shared with the team. Pick the model, set the system instruction, allow tools and capabilities, and connect knowledge. Or make one by chatting with a model in OneAI."
     }

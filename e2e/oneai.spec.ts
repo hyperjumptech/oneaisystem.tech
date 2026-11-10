@@ -3,8 +3,8 @@ import { test, expect } from "@playwright/test";
 import { getOneaiDocxPath } from "@/app/[lang]/(hyperjump)/oneai/get-oneai-docx-download";
 import { getOneaiPdfPath } from "@/app/[lang]/(hyperjump)/oneai/get-oneai-pdf-download";
 import {
-  oneaiCapabilities8Text,
-  oneaiCapabilities8Title,
+  oneaiCapabilities7Text,
+  oneaiCapabilities7Title,
   oneaiCapabilitiesLabel,
   oneaiComparisonHeadingPartsControl,
   oneaiDocxDownloadCta,
@@ -106,10 +106,10 @@ for (const locale of supportedLanguages) {
         section.getByRole("heading", { name: oneaiCapabilitiesLabel(locale) })
       ).toBeVisible();
       await expect(
-        section.getByRole("heading", { name: oneaiCapabilities8Title(locale) })
+        section.getByRole("heading", { name: oneaiCapabilities7Title(locale) })
       ).toBeVisible();
       await expect(
-        section.getByText(oneaiCapabilities8Text(locale))
+        section.getByText(oneaiCapabilities7Text(locale))
       ).toBeVisible();
     });
 

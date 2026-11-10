@@ -11,7 +11,10 @@ describe("getOneaiCapabilities", () => {
     );
 
     // Assert
-    expect(capabilities).toHaveLength(9);
+    expect(capabilities).toHaveLength(8);
+    expect(capabilities.map((capability) => capability.title)).not.toContain(
+      "Multiple Providers"
+    );
     expect(createAgents).toEqual({
       title: "Create agents",
       text: "Personal, or shared with the team. Pick the model, set the system instruction, allow tools and capabilities, and connect knowledge. Or make one by chatting with a model in OneAI."
@@ -26,7 +29,7 @@ describe("getOneaiCapabilities", () => {
     );
 
     // Assert
-    expect(capabilities).toHaveLength(9);
+    expect(capabilities).toHaveLength(8);
     expect(createAgents?.text).toContain("dibagikan ke tim");
     expect(createAgents?.text).toContain("instruksi sistem");
     expect(createAgents?.text).toContain("chat dengan model di OneAI");
