@@ -16,22 +16,6 @@ import {
   type SupportedLanguage
 } from "@/locales/.generated/types";
 import {
-  oneaiCapabilities0Text,
-  oneaiCapabilities0Title,
-  oneaiCapabilities1Text,
-  oneaiCapabilities1Title,
-  oneaiCapabilities2Text,
-  oneaiCapabilities2Title,
-  oneaiCapabilities3Text,
-  oneaiCapabilities3Title,
-  oneaiCapabilities4Text,
-  oneaiCapabilities4Title,
-  oneaiCapabilities5Text,
-  oneaiCapabilities5Title,
-  oneaiCapabilities6Text,
-  oneaiCapabilities6Title,
-  oneaiCapabilities7Text,
-  oneaiCapabilities7Title,
   oneaiCapabilitiesLabel,
   oneaiCloseCtaCta,
   oneaiCloseCtaDesc,
@@ -70,6 +54,7 @@ import {
   StaggerItem
 } from "./components/motion-wrappers";
 import { buildOneaiMailto } from "./oneai/build-oneai-mailto";
+import { getOneaiCapabilities } from "./oneai/get-oneai-capabilities";
 import {
   getDefaultOneaiFaqs,
   getOneaiJsonLd,
@@ -167,40 +152,7 @@ export default async function HomePage({ params }: HomePageProps) {
       text: oneaiPillars2Text(lang)
     }
   ];
-  const capabilities = [
-    {
-      title: oneaiCapabilities0Title(lang),
-      text: oneaiCapabilities0Text(lang)
-    },
-    {
-      title: oneaiCapabilities1Title(lang),
-      text: oneaiCapabilities1Text(lang)
-    },
-    {
-      title: oneaiCapabilities2Title(lang),
-      text: oneaiCapabilities2Text(lang)
-    },
-    {
-      title: oneaiCapabilities3Title(lang),
-      text: oneaiCapabilities3Text(lang)
-    },
-    {
-      title: oneaiCapabilities4Title(lang),
-      text: oneaiCapabilities4Text(lang)
-    },
-    {
-      title: oneaiCapabilities5Title(lang),
-      text: oneaiCapabilities5Text(lang)
-    },
-    {
-      title: oneaiCapabilities6Title(lang),
-      text: oneaiCapabilities6Text(lang)
-    },
-    {
-      title: oneaiCapabilities7Title(lang),
-      text: oneaiCapabilities7Text(lang)
-    }
-  ];
+  const capabilities = getOneaiCapabilities({ lang });
   return (
     <main className="pb-24 md:pb-0">
       <script
