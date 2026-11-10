@@ -43,7 +43,7 @@ export default function Nav({ lang }: NavProps) {
           "group-data-[scroll=true]:border-b group-data-[scroll=true]:border-black/6 group-data-[scroll=true]:bg-white/95",
           isOpen && "border-b border-black/6 bg-white/95"
         )}>
-        <div className="mx-auto flex w-5xl items-center justify-between px-4 md:px-20 xl:px-0">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 md:px-20 xl:px-0">
           <Link
             href={`/${lang}`}
             onClick={() => setIsOpen(false)}
@@ -108,7 +108,7 @@ export default function Nav({ lang }: NavProps) {
 
       {isOpen && (
         <div className="border-b border-black/6 bg-white/95 lg:hidden">
-          <div className="mx-auto flex w-full flex-col gap-1 px-4 py-4 md:px-20 xl:px-0">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-4 md:px-20 xl:px-0">
             {menu(lang).map(({ href, label }) => (
               <Link
                 key={label}
