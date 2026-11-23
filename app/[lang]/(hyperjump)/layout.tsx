@@ -1,3 +1,4 @@
+import { HydrationMarker } from "@/app/components/hydration-marker";
 import ScrollObserver from "@/app/components/scroll-observer";
 import type { SupportedLanguage } from "@/locales/.generated/types";
 import Footer from "./components/footer";
@@ -16,6 +17,7 @@ export default async function MainLangLayout({
 
   return (
     <>
+      <HydrationMarker />
       <ScrollObserver />
       <div className="relative min-h-screen bg-white antialiased">
         <Nav lang={lang as SupportedLanguage} />

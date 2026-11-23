@@ -16,7 +16,8 @@ import {
   footerTest,
   gotoAndWait,
   headerTest,
-  metaTest
+  metaTest,
+  waitForHydration
 } from "./shared-test";
 
 for (const locale of supportedLanguages) {
@@ -52,6 +53,19 @@ for (const locale of supportedLanguages) {
         await expect(
           table.getByText("https://app.avenu.hyperjump.tech/v1")
         ).toBeVisible();
+      });
+
+      test("links the console domain to the OneAI app", async ({ page }) => {
+        const link = page.getByTestId("docs-console-link").first();
+        await expect(link).toBeVisible();
+        await expect(link).toHaveText("OneAI");
+        await expect(link).toHaveAttribute(
+          "href",
+          "https://app.avenu.hyperjump.tech/"
+        );
+        await expect(page.getByText("at app.avenu.hyperjump.tech")).toHaveCount(
+          0
+        );
       });
 
       test("nav exposes the docs entry", async ({ page }) => {
@@ -134,6 +148,7 @@ for (const locale of supportedLanguages) {
           context
         }) => {
           await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+          await waitForHydration(page);
           const configBlock = page.getByTestId("docs-code-block").nth(1);
 
           await configBlock.getByTestId("docs-copy-button").click();
@@ -152,6 +167,7 @@ for (const locale of supportedLanguages) {
           const select = footer.getByRole("combobox");
           const changed = locale === "en" ? "id" : "en";
 
+          await waitForHydration(page);
           await select.selectOption(changed);
           await page.waitForURL(new RegExp(`/${changed}/docs/${slug}$`));
         });

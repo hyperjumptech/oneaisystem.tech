@@ -12,6 +12,12 @@ export async function gotoAndWait(page: Page, url: string) {
   );
 }
 
+export async function waitForHydration(page: Page) {
+  await page.waitForFunction(
+    () => document.documentElement.dataset.hydrated === "true"
+  );
+}
+
 export function metaTest() {
   return () => {
     test("Meta title and description should exist", async ({ page }) => {
