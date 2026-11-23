@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import {
   oneaiNavCapabilities,
   oneaiNavComparison,
+  oneaiNavDocs,
   oneaiNavFaq,
   oneaiNavSupport
 } from "@/locales/.generated/server";
@@ -23,6 +24,7 @@ function menu(lang: SupportedLanguage) {
   return [
     { label: oneaiNavCapabilities(lang), href: `/${lang}#capabilities` },
     { label: oneaiNavComparison(lang), href: `/${lang}#comparison` },
+    { label: oneaiNavDocs(lang), href: `/${lang}/docs` },
     { label: oneaiNavSupport(lang), href: `/${lang}#support` },
     { label: oneaiNavFaq(lang), href: `/${lang}#faqs` }
   ];

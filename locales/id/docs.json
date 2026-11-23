@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Dokumentasi OneAI: Hubungkan OneAI ke Agen Coding Anda | Hyperjump",
+    "description": "Arahkan Claude Code, OpenCode, dan agen coding terminal lain lewat OneAI dengan satu virtual key. Panduan langkah demi langkah untuk endpoint kompatibel Anthropic dan kompatibel OpenAI."
+  },
+  "index": {
+    "eyebrow": "Dokumentasi",
+    "heading": "Hubungkan OneAI ke agen coding Anda",
+    "lede": "Agen coding terminal seperti Claude Code dan OpenCode bisa mengirim permintaan model ke OneAI, bukan ke API vendor. Satu virtual key, satu anggaran, dan model yang disetujui perusahaan tetap dipakai di alat yang sudah digunakan engineer Anda.",
+    "quickstart_label": "Sebelum mulai",
+    "quickstart_heading": "Buat virtual key",
+    "quickstart_steps": {
+      "0": {
+        "title": "Buka konsol OneAI",
+        "text": "Masuk sebagai User atau Operator di app.avenu.hyperjump.tech."
+      },
+      "1": {
+        "title": "Buat virtual key",
+        "text": "Buka Virtual Keys dari navigation bar lalu pilih Create New Virtual Key. Beri nama key supaya tim mudah mengenalinya, izinkan hanya model yang boleh dipanggil, dan tentukan anggaran yang boleh dipakai. Model yang tidak diizinkan tidak bisa dipanggil oleh key ini."
+      },
+      "2": {
+        "title": "Salin key sekali saja",
+        "text": "Key hanya ditampilkan saat dibuat. Simpan di password manager. Perlakukan seperti password: siapa pun yang memegangnya bisa memakai anggaran Anda."
+      }
+    },
+    "harnesses_label": "Harness yang didukung",
+    "endpoints_label": "Endpoint",
+    "endpoints_heading": "Pilih endpoint yang cocok dengan alat Anda",
+    "endpoints_desc": "OneAI menyediakan dua API kompatibel. Alat bergaya Anthropic memakai path /anthropic, alat bergaya OpenAI memakai path /v1. Keduanya menerima virtual key yang sama.",
+    "endpoints_columns": {
+      "harness": "Harness",
+      "protocol": "Protokol",
+      "base_url": "Base URL"
+    },
+    "security_heading": "Jangan simpan key di repositori",
+    "security_text": "Jangan pernah commit virtual key ke git. Simpan di profil shell, secret manager, atau file konfigurasi alat di luar repositori. Kalau key bocor, cabut di konsol OneAI lalu buat yang baru.",
+    "cta_heading": "Harness Anda belum ada di sini?",
+    "cta_desc": "Beri tahu alat yang dipakai tim Anda, kami akan menulis panduannya.",
+    "cta": "Hubungi solution@hyperjump.tech"
+  },
+  "common": {
+    "prerequisites": "Prasyarat",
+    "step": "Langkah",
+    "copy": "Salin",
+    "copied": "Tersalin",
+    "note": "Catatan",
+    "important": "Penting",
+    "config_file": "File konfigurasi",
+    "environment": "Variabel environment",
+    "verify": "Verifikasi integrasi",
+    "virtual_key_title": "Buat virtual key",
+    "virtual_key_text": "Masuk sebagai User atau Operator di app.avenu.hyperjump.tech lalu buka Virtual Keys dari navigation bar. Pilih Create New Virtual Key, lalu tentukan nama key, model yang boleh dipanggil key ini, dan anggaran yang boleh dipakai. Nilai key hanya ditampilkan sekali saat dibuat, jadi salin ke password manager sebelum lanjut.",
+    "virtual_key_note": "Kalau key hilang, cabut di Virtual Keys lalu buat yang baru. Jangan pernah commit ke git.",
+    "all_guides": "Semua panduan",
+    "back_to_docs": "Kembali ke dokumentasi",
+    "columns": {
+      "variable": "Variabel",
+      "description": "Keterangan"
+    }
+  },
+  "claude_code": {
+    "name": "Claude Code",
+    "summary": "Agen coding terminal dari Anthropic. OneAI berbicara dengan Anthropic Messages API, jadi Claude Code hanya butuh auth token, base URL, dan tiga ID model.",
+    "prerequisites": "Akun OneAI aktif, mesin Linux atau macOS, serta curl dan bash terpasang.",
+    "install_title": "Pasang Claude Code",
+    "install_text": "Jalankan installer resmi, lalu pastikan binary-nya ada di PATH.",
+    "install_note": "Kalau perintah claude tidak ditemukan, restart terminal atau muat ulang profil shell dengan source ~/.bashrc atau source ~/.zshrc.",
+    "configure_title": "Arahkan Claude Code ke OneAI",
+    "configure_text": "Claude Code membaca variabel ANTHROPIC_* dari blok env di ~/.claude/settings.json. Buat filenya kalau belum ada, lalu gabungkan blok berikut.",
+    "configure_note": "Kalau settings.json sudah punya objek env, tambahkan key berikut ke objek itu, jangan ganti seluruh file.",
+    "env": {
+      "0": {
+        "name": "ANTHROPIC_AUTH_TOKEN",
+        "text": "Virtual key OneAI Anda. OneAI mengautentikasi lewat variabel ini, jadi tidak perlu API key Anthropic."
+      },
+      "1": {
+        "name": "ANTHROPIC_BASE_URL",
+        "text": "Endpoint kompatibel Anthropic milik OneAI. Permintaan dikirim ke https://app.avenu.hyperjump.tech/anthropic."
+      },
+      "2": {
+        "name": "ANTHROPIC_MODEL",
+        "text": "Model default untuk sesi baru. Pakai ID model yang tersedia untuk key Anda di OneAI."
+      },
+      "3": {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "text": "Model untuk tugas kelas Sonnet, tempat Claude Code mengirim sebagian besar pekerjaan."
+      },
+      "4": {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "text": "Model untuk tugas latar belakang yang cepat seperti ringkasan dan judul. Model yang lebih murah membuat panggilan ini hemat."
+      }
+    },
+    "models_title": "Tentang ID model",
+    "models_text": "ID model memakai path provider yang diekspos OneAI, misalnya openrouter/deepseek/deepseek-v4.1-flash. Pilih ID yang muncul di daftar model OneAI Anda, dan pakai ID yang sama di beberapa variabel kalau ingin semua tier memakai model yang sama.",
+    "verify_title": "Kirim prompt uji",
+    "verify_text": "Buka direktori proyek, jalankan Claude Code, lalu tanya model apa yang sedang dipakai. Jawaban tanpa error autentikasi berarti permintaan sudah lewat OneAI."
+  },
+  "opencode": {
+    "name": "OpenCode",
+    "summary": "Agen terminal open-source dengan registri provider yang bisa dikonfigurasi. OneAI dipasang sebagai provider kompatibel OpenAI kustom.",
+    "prerequisites": "Akun OneAI aktif, mesin Linux atau macOS, serta curl dan bash terpasang.",
+    "install_title": "Pasang OpenCode",
+    "install_text": "Jalankan installer resmi, lalu pastikan binary-nya ada di PATH.",
+    "install_note": "Kalau perintah opencode tidak ditemukan, restart terminal atau muat ulang profil shell dengan source ~/.bashrc atau source ~/.zshrc.",
+    "configure_title": "Daftarkan OneAI sebagai provider",
+    "configure_text": "OpenCode membaca provider dari ~/.config/opencode/opencode.jsonc. Buat filenya kalau belum ada, lalu tambahkan entri OneAI di dalam objek provider.",
+    "configure_note": "Kalau opencode.jsonc sudah berisi provider, tambahkan OneAI di sampingnya, jangan ganti file.",
+    "fields": {
+      "0": {
+        "name": "npm",
+        "text": "Adapter @ai-sdk/openai-compatible. Ini yang membuat OpenCode bisa bicara dengan endpoint kompatibel OpenAI, termasuk OneAI."
+      },
+      "1": {
+        "name": "name",
+        "text": "Nama tampilan di pemilih model OpenCode. Biarkan OneAI supaya sumbernya jelas."
+      },
+      "2": {
+        "name": "options.baseURL",
+        "text": "Endpoint kompatibel OpenAI milik OneAI di https://app.avenu.hyperjump.tech/v1."
+      },
+      "3": {
+        "name": "options.apiKey",
+        "text": "Virtual key OneAI Anda. OpenCode mengirimnya sebagai bearer token di setiap permintaan."
+      },
+      "4": {
+        "name": "models",
+        "text": "ID model yang ingin diekspos, masing-masing dengan label yang mudah dibaca. Tambahkan sebanyak yang diizinkan virtual key Anda."
+      }
+    },
+    "verify_title": "Pilih provider lalu kirim prompt",
+    "verify_text": "Jalankan OpenCode, buka pemilih model, pilih OneAI dan model DeepSeek, lalu tanya model apa yang sedang dipakai. Jawaban tanpa error autentikasi berarti permintaan sudah lewat OneAI."
+  }
+}

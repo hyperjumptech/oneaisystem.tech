@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "OneAI Docs: Connect OneAI to Your Coding Agent | Hyperjump",
+    "description": "Route Claude Code, OpenCode, and other terminal coding agents through OneAI with one virtual key. Step-by-step setup for the Anthropic-compatible and OpenAI-compatible endpoints."
+  },
+  "index": {
+    "eyebrow": "Documentation",
+    "heading": "Connect OneAI to your coding agent",
+    "lede": "Terminal coding agents such as Claude Code and OpenCode can send model requests to OneAI instead of a vendor API. You keep one virtual key, one budget, and your company's approved models inside the tools your engineers already use.",
+    "quickstart_label": "Before you start",
+    "quickstart_heading": "Create a virtual key",
+    "quickstart_steps": {
+      "0": {
+        "title": "Open the OneAI console",
+        "text": "Sign in as a User or Operator at app.avenu.hyperjump.tech."
+      },
+      "1": {
+        "title": "Create a virtual key",
+        "text": "Open Virtual Keys from the navigation bar and choose Create New Virtual Key. Name the key so your team can recognize it, allow only the models it should call, and set the budget it may spend. A model that is not allowed cannot be called by the key."
+      },
+      "2": {
+        "title": "Copy the key once",
+        "text": "The key is shown only at creation. Store it in your password manager. Treat it like a password: whoever holds it can spend your budget."
+      }
+    },
+    "harnesses_label": "Supported harnesses",
+    "endpoints_label": "Endpoints",
+    "endpoints_heading": "Pick the endpoint that matches your tool",
+    "endpoints_desc": "OneAI exposes two compatible APIs. Anthropic-style tools use the /anthropic path, OpenAI-style tools use the /v1 path. Both accept the same virtual key.",
+    "endpoints_columns": {
+      "harness": "Harness",
+      "protocol": "Protocol",
+      "base_url": "Base URL"
+    },
+    "security_heading": "Keep the key out of your repository",
+    "security_text": "Never commit a virtual key to git. Keep it in your shell profile, a secret manager, or the tool's own config file outside the repository. If a key leaks, revoke it in the OneAI console and create a new one.",
+    "cta_heading": "Harness not listed?",
+    "cta_desc": "Tell us which tool your team uses and we will write the setup guide for it.",
+    "cta": "Contact solution@hyperjump.tech"
+  },
+  "common": {
+    "prerequisites": "Prerequisites",
+    "step": "Step",
+    "copy": "Copy",
+    "copied": "Copied",
+    "note": "Note",
+    "important": "Important",
+    "config_file": "Config file",
+    "environment": "Environment variables",
+    "verify": "Verify the integration",
+    "virtual_key_title": "Create a virtual key",
+    "virtual_key_text": "Sign in as a User or Operator at app.avenu.hyperjump.tech and open Virtual Keys from the navigation bar. Choose Create New Virtual Key, then set the key name, the models this key may call, and the budget it may spend. The key value is shown once at creation, so copy it into a password manager before you continue.",
+    "virtual_key_note": "If you lose the key, revoke it in Virtual Keys and create a new one. Never commit it to git.",
+    "all_guides": "All guides",
+    "back_to_docs": "Back to docs",
+    "columns": {
+      "variable": "Variable",
+      "description": "Description"
+    }
+  },
+  "claude_code": {
+    "name": "Claude Code",
+    "summary": "Anthropic's terminal coding agent. OneAI speaks the Anthropic Messages API, so Claude Code needs only an auth token, a base URL, and three model IDs.",
+    "prerequisites": "An active OneAI account, a Linux or macOS machine, and curl and bash installed.",
+    "install_title": "Install Claude Code",
+    "install_text": "Run the official installer, then check that the binary is on your PATH.",
+    "install_note": "If the claude command is not found, restart your terminal or reload your shell profile with source ~/.bashrc or source ~/.zshrc.",
+    "configure_title": "Point Claude Code at OneAI",
+    "configure_text": "Claude Code reads ANTHROPIC_* variables from the env block of ~/.claude/settings.json. Create the file if it does not exist and merge this block into it.",
+    "configure_note": "If settings.json already contains an env object, add these keys to it instead of replacing the whole file.",
+    "env": {
+      "0": {
+        "name": "ANTHROPIC_AUTH_TOKEN",
+        "text": "Your OneAI virtual key. OneAI authenticates on this variable, so no Anthropic API key is needed."
+      },
+      "1": {
+        "name": "ANTHROPIC_BASE_URL",
+        "text": "OneAI's Anthropic-compatible endpoint. Requests go to https://app.avenu.hyperjump.tech/anthropic."
+      },
+      "2": {
+        "name": "ANTHROPIC_MODEL",
+        "text": "Default model for new sessions. Use a model ID that OneAI lists for your key."
+      },
+      "3": {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "text": "Model used for Sonnet-tier tasks, which is where Claude Code sends most of its work."
+      },
+      "4": {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "text": "Model used for fast background tasks such as summaries and titles. A cheaper model keeps those calls inexpensive."
+      }
+    },
+    "models_title": "About model IDs",
+    "models_text": "Model IDs use the provider path that OneAI exposes, for example openrouter/deepseek/deepseek-v4.1-flash. Pick IDs that appear in your OneAI model list, and keep the same ID in more than one variable if you want every tier to use the same model.",
+    "verify_title": "Send a test prompt",
+    "verify_text": "Open a project directory, start Claude Code, and ask which model it is running. A reply with no authentication error means requests are routing through OneAI."
+  },
+  "opencode": {
+    "name": "OpenCode",
+    "summary": "An open-source terminal agent with a configurable provider registry. OneAI plugs in as a custom OpenAI-compatible provider.",
+    "prerequisites": "An active OneAI account, a Linux or macOS machine, and curl and bash installed.",
+    "install_title": "Install OpenCode",
+    "install_text": "Run the official installer, then check that the binary is on your PATH.",
+    "install_note": "If the opencode command is not found, restart your terminal or reload your shell profile with source ~/.bashrc or source ~/.zshrc.",
+    "configure_title": "Register OneAI as a provider",
+    "configure_text": "OpenCode reads providers from ~/.config/opencode/opencode.jsonc. Create the file if it does not exist and add the OneAI entry inside the provider object.",
+    "configure_note": "If opencode.jsonc already lists providers, add OneAI next to them instead of replacing the file.",
+    "fields": {
+      "0": {
+        "name": "npm",
+        "text": "The @ai-sdk/openai-compatible adapter. It lets OpenCode talk to any OpenAI-compatible endpoint, including OneAI."
+      },
+      "1": {
+        "name": "name",
+        "text": "Display name shown in the OpenCode model picker. Keep it as OneAI so the source is obvious."
+      },
+      "2": {
+        "name": "options.baseURL",
+        "text": "OneAI's OpenAI-compatible endpoint at https://app.avenu.hyperjump.tech/v1."
+      },
+      "3": {
+        "name": "options.apiKey",
+        "text": "Your OneAI virtual key. OpenCode sends it as a bearer token on every request."
+      },
+      "4": {
+        "name": "models",
+        "text": "Model IDs you want to expose, each with a readable label. Add as many as your virtual key allows."
+      }
+    },
+    "verify_title": "Select the provider and send a prompt",
+    "verify_text": "Start OpenCode, open the model picker, choose OneAI and the DeepSeek model, then ask which model is running. A reply with no authentication error means requests are routing through OneAI."
+  }
+}
