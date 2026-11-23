@@ -144,17 +144,33 @@ for (const locale of supportedLanguages) {
         });
 
         test("copy button copies the snippet to the clipboard", async ({
-          page,
-          context
+          page
         }) => {
-          await context.grantPermissions(["clipboard-read", "clipboard-write"]);
           await waitForHydration(page);
-          const configBlock = page.getByTestId("docs-code-block").nth(1);
 
+          await page.evaluate(() => {
+            const store = { text: "" };
+            (
+              window as unknown as { __clipboardStore: typeof store }
+            ).__clipboardStore = store;
+            Object.defineProperty(navigator, "clipboard", {
+              configurable: true,
+              value: {
+                writeText: async (text: string) => {
+                  store.text = text;
+                },
+                readText: async () => store.text
+              }
+            });
+          });
+
+          const configBlock = page.getByTestId("docs-code-block").nth(1);
           await configBlock.getByTestId("docs-copy-button").click();
 
-          const clipboard = await page.evaluate(() =>
-            navigator.clipboard.readText()
+          const clipboard = await page.evaluate(
+            () =>
+              (window as unknown as { __clipboardStore: { text: string } })
+                .__clipboardStore.text
           );
           expect(clipboard).toContain(harness.baseUrl);
           await expect(
