@@ -6,7 +6,10 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"]
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  experimental: {
+    agentUpgrade: "security"
+  }
 };
 
 const withMDX = createMDX();
