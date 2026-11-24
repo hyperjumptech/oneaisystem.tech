@@ -5,37 +5,44 @@ import { cn } from "@/lib/utils";
 import { ConsoleLinkText } from "./console-link";
 
 type DocStepProps = {
+  /** Stable identifier used by tests, independent of the step order. */
+  id: string;
   index: number;
   stepLabel: string;
   title: string;
   text: string;
   noteLabel: string;
   note?: string;
+  /** Optional paragraph rendered after the code blocks. */
+  footer?: string;
   children?: ReactNode;
 };
 
 /**
- * One numbered setup step: heading, body, optional note callout, and code.
+ * One numbered setup step: heading, body, optional note callout, code, and
+ * an optional closing paragraph.
  */
 export function DocStep({
+  id,
   index,
   stepLabel,
   title,
   text,
   noteLabel,
   note,
+  footer,
   children
 }: DocStepProps) {
   return (
-    <li className="relative pl-12" data-testid="docs-step">
+    <li className="relative pl-12" data-testid="docs-step" data-step-id={id}>
       <span
         aria-hidden
         className="bg-hyperjump-blue absolute top-0 left-0 flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold text-white">
         {index + 1}
       </span>
-      <p className="text-hyperjump-blue mb-1 text-xs font-bold tracking-[0.16em] uppercase">
+      <span className="sr-only">
         {stepLabel} {index + 1}
-      </p>
+      </span>
       <h3 className="text-hyperjump-black mb-2 text-xl font-semibold">
         {title}
       </h3>
@@ -55,6 +62,11 @@ export function DocStep({
         </p>
       )}
       {children}
+      {footer && (
+        <p className="text-hyperjump-gray mt-4 text-sm leading-relaxed">
+          <ConsoleLinkText text={footer} />
+        </p>
+      )}
     </li>
   );
 }

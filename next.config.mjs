@@ -7,9 +7,6 @@ const nextConfig = {
     unoptimized: true
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  experimental: {
-    agentUpgrade: "security"
-  }
 };
 
 const withMDX = createMDX();

@@ -7,17 +7,19 @@ import {
 } from "@/locales/.generated/strings";
 
 import {
+  CLAUDE_CODE_COMMAND,
   CLAUDE_CODE_CONFIG_PATH,
   CLAUDE_CODE_INSTALL_SNIPPET,
   CLAUDE_CODE_SETTINGS_SNIPPET,
-  CLAUDE_CODE_VERSION_SNIPPET,
+  type DocsCodeLanguage,
   getRunSnippet,
+  getVersionSnippet,
   ONEAI_ANTHROPIC_BASE_URL,
   ONEAI_OPENAI_BASE_URL,
+  OPENCODE_COMMAND,
   OPENCODE_CONFIG_PATH,
   OPENCODE_CONFIG_SNIPPET,
-  OPENCODE_INSTALL_SNIPPET,
-  OPENCODE_VERSION_SNIPPET
+  OPENCODE_INSTALL_SNIPPET
 } from "./snippets";
 
 /** Harness slugs that have a guide page under /[lang]/docs/[slug]. */
@@ -26,13 +28,25 @@ export type DocsHarnessSlug = "claude-code" | "opencode";
 /** Protocol family the harness speaks, which decides the OneAI base URL. */
 export type DocsProtocol = "anthropic" | "openai-compatible";
 
+/** Human-readable protocol names shown on the hub and on guide pages. */
+export const PROTOCOL_LABELS: Record<DocsProtocol, string> = {
+  anthropic: "Anthropic Messages API",
+  "openai-compatible": "OpenAI-compatible"
+};
+
 export type DocsHarness = {
   slug: DocsHarnessSlug;
-  /** Static product name. Never translated. */
+  /** CLI binary the reader runs. Never translated. */
   command: string;
   protocol: DocsProtocol;
   baseUrl: string;
   configPath: string;
+  /**
+   * Syntax of the config file at configPath. It follows the file extension,
+   * not the protocol: Claude Code's settings.json is JSON, OpenCode's
+   * opencode.jsonc is JSON with comments.
+   */
+  configLanguage: DocsCodeLanguage;
   installSnippet: string;
   versionSnippet: string;
   configSnippet: string;
@@ -52,27 +66,29 @@ export type DocsHarness = {
 export const DOCS_HARNESSES: DocsHarness[] = [
   {
     slug: "claude-code",
-    command: "claude",
+    command: CLAUDE_CODE_COMMAND,
     protocol: "anthropic",
     baseUrl: ONEAI_ANTHROPIC_BASE_URL,
     configPath: CLAUDE_CODE_CONFIG_PATH,
+    configLanguage: "json",
     installSnippet: CLAUDE_CODE_INSTALL_SNIPPET,
-    versionSnippet: CLAUDE_CODE_VERSION_SNIPPET,
+    versionSnippet: getVersionSnippet(CLAUDE_CODE_COMMAND),
     configSnippet: CLAUDE_CODE_SETTINGS_SNIPPET,
-    runSnippet: getRunSnippet("claude"),
+    runSnippet: getRunSnippet(CLAUDE_CODE_COMMAND),
     getName: docsClaudeCodeName,
     getSummary: docsClaudeCodeSummary
   },
   {
     slug: "opencode",
-    command: "opencode",
+    command: OPENCODE_COMMAND,
     protocol: "openai-compatible",
     baseUrl: ONEAI_OPENAI_BASE_URL,
     configPath: OPENCODE_CONFIG_PATH,
+    configLanguage: "jsonc",
     installSnippet: OPENCODE_INSTALL_SNIPPET,
-    versionSnippet: OPENCODE_VERSION_SNIPPET,
+    versionSnippet: getVersionSnippet(OPENCODE_COMMAND),
     configSnippet: OPENCODE_CONFIG_SNIPPET,
-    runSnippet: getRunSnippet("opencode"),
+    runSnippet: getRunSnippet(OPENCODE_COMMAND),
     getName: docsOpencodeName,
     getSummary: docsOpencodeSummary
   }

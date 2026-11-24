@@ -10,6 +10,7 @@ import {
   type SupportedLanguage
 } from "@/locales/.generated/types";
 import {
+  docsIndexConsoleCta,
   docsIndexCta,
   docsIndexCtaDesc,
   docsIndexCtaHeading,
@@ -20,6 +21,7 @@ import {
   docsIndexEndpointsHeading,
   docsIndexEndpointsLabel,
   docsIndexEyebrow,
+  docsIndexHarnessesHeading,
   docsIndexHarnessesLabel,
   docsIndexHeading,
   docsIndexLede,
@@ -27,11 +29,16 @@ import {
   docsIndexQuickstartLabel,
   docsIndexSecurityHeading,
   docsIndexSecurityText,
+  docsMailtoBody,
+  docsMailtoSubject,
   docsMetaDescription,
   docsMetaTitle
 } from "@/locales/.generated/strings";
 
-import { buildOneaiMailto } from "../oneai/build-oneai-mailto";
+import {
+  buildOneaiMailto,
+  ONEAI_CONTACT_EMAIL
+} from "../oneai/build-oneai-mailto";
 import {
   SectionReveal,
   StaggerContainer,
@@ -94,8 +101,8 @@ export default async function DocsPage({ params }: DocsPageProps) {
   const { lang } = await params;
   const { cards, endpoints, quickstart } = getDocsIndex({ lang });
   const mailtoHref = buildOneaiMailto({
-    subject: docsIndexCtaHeading(lang),
-    body: docsIndexCtaDesc(lang)
+    subject: docsMailtoSubject(lang),
+    body: docsMailtoBody(lang)
   });
 
   return (
@@ -145,14 +152,15 @@ export default async function DocsPage({ params }: DocsPageProps) {
             ))}
           </StaggerContainer>
           <p className="mt-6">
-            <Link
+            <a
               href={ONEAI_CONSOLE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              data-testid="docs-console-cta"
               className="text-hyperjump-blue inline-flex items-center gap-1.5 text-sm font-semibold hover:underline">
-              OneAI
+              {docsIndexConsoleCta(lang)}
               <ArrowRightIcon className="h-3.5 w-3.5" aria-hidden />
-            </Link>
+            </a>
           </p>
         </div>
       </section>
@@ -160,8 +168,11 @@ export default async function DocsPage({ params }: DocsPageProps) {
       <section id="harnesses" className="py-16 md:py-20">
         <div className="mx-auto max-w-5xl px-4 md:px-8">
           <SectionReveal>
-            <h2 className="text-hyperjump-black mb-8 text-2xl font-semibold md:text-3xl">
+            <p className="text-hyperjump-blue mb-2 text-xs font-bold tracking-[0.16em] uppercase">
               {docsIndexHarnessesLabel(lang)}
+            </p>
+            <h2 className="text-hyperjump-black mb-8 text-2xl font-semibold md:text-3xl">
+              {docsIndexHarnessesHeading(lang)}
             </h2>
           </SectionReveal>
           <StaggerContainer className="grid gap-5 sm:grid-cols-2">
@@ -183,7 +194,7 @@ export default async function DocsPage({ params }: DocsPageProps) {
                   <p className="text-hyperjump-gray mb-4 text-[15px] leading-relaxed">
                     {summary}
                   </p>
-                  <span className="text-hyperjump-muted mt-auto font-mono text-xs">
+                  <span className="text-hyperjump-muted font-geist-mono mt-auto text-xs">
                     {protocol}
                   </span>
                 </Link>
@@ -235,7 +246,7 @@ export default async function DocsPage({ params }: DocsPageProps) {
                       <td className="text-hyperjump-gray px-5 py-3">
                         {protocol}
                       </td>
-                      <td className="text-hyperjump-gray px-5 py-3 font-mono text-xs break-all">
+                      <td className="text-hyperjump-gray font-geist-mono px-5 py-3 text-xs break-all">
                         {baseUrl}
                       </td>
                     </tr>
@@ -281,10 +292,10 @@ export default async function DocsPage({ params }: DocsPageProps) {
               asChild
               size="lg"
               className="bg-hyperjump-blue hover:bg-hyperjump-blue/90 h-12 rounded-full px-8 text-base font-semibold">
-              <Link href={mailtoHref} data-testid="docs-cta">
+              <a href={mailtoHref} data-testid="docs-cta">
                 <MailIcon className="mr-2 h-4 w-4" aria-hidden />
-                {docsIndexCta(lang)}
-              </Link>
+                {docsIndexCta(lang, { email: ONEAI_CONTACT_EMAIL })}
+              </a>
             </Button>
           </SectionReveal>
         </div>

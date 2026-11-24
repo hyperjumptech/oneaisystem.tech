@@ -42,11 +42,30 @@ describe("DOCS_HARNESSES", () => {
     }
   });
 
-  it("embeds the base URL and key placeholder in the config snippet", () => {
+  it("embeds the base URL in the config snippet", () => {
     for (const harness of DOCS_HARNESSES) {
       expect(harness.configSnippet).toContain(harness.baseUrl);
-      expect(harness.configSnippet).toContain(VIRTUAL_KEY_PLACEHOLDER);
     }
+  });
+
+  it("stores the OpenCode key in the config file", () => {
+    const opencode = DOCS_HARNESSES.find(
+      (harness) => harness.slug === "opencode"
+    );
+
+    expect(opencode?.configSnippet).toContain(
+      `"apiKey": "${VIRTUAL_KEY_PLACEHOLDER}"`
+    );
+    expect(opencode?.configSnippet).not.toContain("{env:");
+    expect(opencode?.runSnippet).not.toContain("export");
+  });
+
+  it("uses the key placeholder only where the tool needs it in the file", () => {
+    const claudeCode = DOCS_HARNESSES.find(
+      (harness) => harness.slug === "claude-code"
+    );
+
+    expect(claudeCode?.configSnippet).toContain(VIRTUAL_KEY_PLACEHOLDER);
   });
 
   it("never contains markdown link syntax inside snippets", () => {
@@ -59,6 +78,13 @@ describe("DOCS_HARNESSES", () => {
       ]) {
         expect(snippet).not.toContain("](");
       }
+    }
+  });
+
+  it("derives the version and run snippets from the CLI command", () => {
+    for (const harness of DOCS_HARNESSES) {
+      expect(harness.versionSnippet).toBe(`${harness.command} --version`);
+      expect(harness.runSnippet).toContain(harness.command);
     }
   });
 

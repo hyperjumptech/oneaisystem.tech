@@ -4,9 +4,15 @@ import {
   DOCS_HARNESSES,
   DOCS_HARNESS_SLUGS
 } from "@/app/[lang]/(hyperjump)/docs/docs-registry";
+import { ONEAI_CONSOLE_URL } from "@/app/[lang]/(hyperjump)/docs/snippets";
 import {
   docsCommonCopied,
-  docsIndexHeading
+  docsCommonCopy,
+  docsCommonCopyFailed,
+  docsIndexConsoleCta,
+  docsIndexHeading,
+  docsMailtoBody,
+  docsMailtoSubject
 } from "@/locales/.generated/strings";
 import { oneaiNavDocs } from "@/locales/.generated/server";
 import { supportedLanguages } from "@/locales/.generated/types";
@@ -58,14 +64,28 @@ for (const locale of supportedLanguages) {
       test("links the console domain to the OneAI app", async ({ page }) => {
         const link = page.getByTestId("docs-console-link").first();
         await expect(link).toBeVisible();
-        await expect(link).toHaveText("OneAI");
+        await expect(link).toHaveText("app.avenu.hyperjump.tech");
         await expect(link).toHaveAttribute(
           "href",
           "https://app.avenu.hyperjump.tech/"
         );
-        await expect(page.getByText("at app.avenu.hyperjump.tech")).toHaveCount(
-          0
-        );
+      });
+
+      test("offers an explicit console CTA under the quickstart", async ({
+        page
+      }) => {
+        const cta = page.getByTestId("docs-console-cta");
+        await expect(cta).toHaveText(docsIndexConsoleCta(locale));
+        await expect(cta).toHaveAttribute("href", ONEAI_CONSOLE_URL);
+      });
+
+      test("mailto CTA uses the dedicated subject and body", async ({
+        page
+      }) => {
+        const href = await page.getByTestId("docs-cta").getAttribute("href");
+
+        expect(href).toContain(encodeURIComponent(docsMailtoSubject(locale)));
+        expect(href).toContain(encodeURIComponent(docsMailtoBody(locale)));
       });
 
       test("nav exposes the docs entry", async ({ page }) => {
@@ -104,18 +124,28 @@ for (const locale of supportedLanguages) {
           await expect(page.locator("h1")).toHaveText(name);
         });
 
-        test("shows the key step and three numbered setup steps", async ({
+        test("shows the key flow and three numbered setup steps", async ({
           page
         }) => {
-          await expect(page.getByTestId("docs-step")).toHaveCount(4);
+          await expect(page.getByTestId("docs-step")).toHaveCount(6);
           await expect(
             page.getByTestId("docs-step").getByTestId("docs-code-block")
-          ).toHaveCount(3);
-          await expect(page.getByTestId("docs-code-block")).toHaveCount(4);
+          ).toHaveCount(5);
+          await expect(page.getByTestId("docs-code-block")).toHaveCount(5);
+        });
+
+        test("field table stays readable on mobile", async ({ page }) => {
+          await page.setViewportSize({ width: 390, height: 844 });
+          const table = page.getByTestId("docs-fields");
+          const overflow = await table.evaluate(
+            (el) => el.scrollWidth - el.clientWidth
+          );
+
+          expect(overflow).toBeLessThanOrEqual(1);
         });
 
         test("explains how to create the virtual key", async ({ page }) => {
-          const keyStep = page.getByTestId("docs-step").first();
+          const keyStep = page.locator('[data-step-id="key"]');
           const text = await keyStep.innerText();
 
           expect(text).toContain("Virtual Keys");
@@ -125,18 +155,37 @@ for (const locale of supportedLanguages) {
         test("install snippet is a working command, not markdown", async ({
           page
         }) => {
-          const installBlock = page.getByTestId("docs-code-block").first();
+          const installBlock = page.locator('[data-code-id="install"]');
           const text = await installBlock.locator("code").innerText();
 
-          expect(text).toContain("curl -fsSL");
-          expect(text).toContain(harness.installSnippet.split(" ")[2]);
+          expect(text.trim()).toBe(harness.installSnippet);
           expect(text).not.toContain("](");
+        });
+
+        test("install step shows how to check the version", async ({
+          page
+        }) => {
+          const versionBlock = page.locator('[data-code-id="version"]');
+          const text = await versionBlock.locator("code").innerText();
+
+          expect(text.trim()).toBe(harness.versionSnippet);
+        });
+
+        test("shows the test prompt inside the verify step", async ({
+          page
+        }) => {
+          const verifyStep = page.locator('[data-step-id="verify"]');
+          const promptBlock = page.locator('[data-code-id="prompt"]');
+          const text = await promptBlock.locator("code").innerText();
+
+          expect(text.length).toBeGreaterThan(0);
+          await expect(verifyStep).toContainText("LLM Logs");
         });
 
         test("config snippet points at the matching OneAI endpoint", async ({
           page
         }) => {
-          const configBlock = page.getByTestId("docs-code-block").nth(1);
+          const configBlock = page.locator('[data-code-id="config"]');
           const text = await configBlock.locator("code").innerText();
 
           expect(text).toContain(harness.baseUrl);
@@ -164,7 +213,7 @@ for (const locale of supportedLanguages) {
             });
           });
 
-          const configBlock = page.getByTestId("docs-code-block").nth(1);
+          const configBlock = page.locator('[data-code-id="config"]');
           await configBlock.getByTestId("docs-copy-button").click();
 
           const clipboard = await page.evaluate(
@@ -173,9 +222,41 @@ for (const locale of supportedLanguages) {
                 .__clipboardStore.text
           );
           expect(clipboard).toContain(harness.baseUrl);
-          await expect(
-            configBlock.getByText(docsCommonCopied(locale))
-          ).toBeVisible();
+          await expect(configBlock.getByTestId("docs-copy-button")).toHaveText(
+            docsCommonCopied(locale)
+          );
+        });
+
+        test("copy button names the block it copies", async ({ page }) => {
+          const configBlock = page.locator('[data-code-id="config"]');
+          const button = configBlock.getByTestId("docs-copy-button");
+
+          await expect(button).toHaveAttribute(
+            "aria-label",
+            `${docsCommonCopy(locale)} ${harness.configPath}`
+          );
+        });
+
+        test("copy button reports a failure", async ({ page }) => {
+          await waitForHydration(page);
+
+          await page.evaluate(() => {
+            Object.defineProperty(navigator, "clipboard", {
+              configurable: true,
+              value: {
+                writeText: async () => {
+                  throw new Error("clipboard blocked");
+                }
+              }
+            });
+          });
+
+          const configBlock = page.locator('[data-code-id="config"]');
+          await configBlock.getByTestId("docs-copy-button").click();
+
+          await expect(configBlock.getByTestId("docs-copy-button")).toHaveText(
+            docsCommonCopyFailed(locale)
+          );
         });
 
         test("keeps the locale when switching language", async ({ page }) => {
@@ -199,7 +280,7 @@ for (const locale of supportedLanguages) {
         });
 
         test("returns to the docs hub", async ({ page }) => {
-          await page.locator(`a[href='/${locale}/docs']`).first().click();
+          await page.getByTestId("docs-nav-back").click();
           await page.waitForURL(new RegExp(`/${locale}/docs$`));
         });
       });

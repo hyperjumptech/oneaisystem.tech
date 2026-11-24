@@ -29,6 +29,14 @@ describe("getDocsIndex", () => {
     expect(protocols).toContain("OpenAI-compatible");
   });
 
+  it("labels the protocol on each card too", () => {
+    const { cards } = getDocsIndex({ lang: "en" });
+    const protocols = cards.map((card) => card.protocol);
+
+    expect(protocols).toContain("Anthropic Messages API");
+    expect(protocols).toContain("OpenAI-compatible");
+  });
+
   it("returns localized quickstart steps", () => {
     const { quickstart } = getDocsIndex({ lang: "en" });
 

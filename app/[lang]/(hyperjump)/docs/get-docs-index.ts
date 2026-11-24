@@ -1,16 +1,17 @@
 import type { SupportedLanguage } from "@/locales/.generated/types";
+
 import {
-  docsIndexQuickstartSteps0Text,
-  docsIndexQuickstartSteps0Title,
-  docsIndexQuickstartSteps1Text,
-  docsIndexQuickstartSteps1Title,
-  docsIndexQuickstartSteps2Text,
-  docsIndexQuickstartSteps2Title
-} from "@/locales/.generated/strings";
+  DOCS_HARNESSES,
+  PROTOCOL_LABELS,
+  type DocsHarness
+} from "./docs-registry";
+import {
+  getDocsKeyFlow,
+  type DocsKeyFlowStep,
+  type DocsKeyFlowStepLoader
+} from "./docs-key-flow";
 
-import { DOCS_HARNESSES, type DocsHarness } from "./docs-registry";
-
-export type DocsQuickstartStep = { title: string; text: string };
+export type DocsQuickstartStep = DocsKeyFlowStep;
 
 export type DocsEndpointRow = {
   name: string;
@@ -19,36 +20,13 @@ export type DocsEndpointRow = {
   href: string;
 };
 
-type QuickstartLoaders = Array<{
-  title: (lang: SupportedLanguage) => string;
-  text: (lang: SupportedLanguage) => string;
-}>;
-
-const DEFAULT_QUICKSTART_LOADERS: QuickstartLoaders = [
-  {
-    title: docsIndexQuickstartSteps0Title,
-    text: docsIndexQuickstartSteps0Text
-  },
-  {
-    title: docsIndexQuickstartSteps1Title,
-    text: docsIndexQuickstartSteps1Text
-  },
-  {
-    title: docsIndexQuickstartSteps2Title,
-    text: docsIndexQuickstartSteps2Text
-  }
-];
-
-const PROTOCOL_LABELS: Record<DocsHarness["protocol"], string> = {
-  anthropic: "Anthropic Messages API",
-  "openai-compatible": "OpenAI-compatible"
-};
+type QuickstartLoaders = DocsKeyFlowStepLoader[];
 
 export type GetDocsIndexOptions = {
   lang: SupportedLanguage;
   /** Harness list for tests */
   harnesses?: DocsHarness[];
-  /** Quickstart loaders for tests */
+  /** Key flow loaders for tests */
   quickstartLoaders?: QuickstartLoaders;
 };
 
@@ -61,13 +39,13 @@ export type GetDocsIndexOptions = {
 export function getDocsIndex({
   lang,
   harnesses = DOCS_HARNESSES,
-  quickstartLoaders = DEFAULT_QUICKSTART_LOADERS
+  quickstartLoaders
 }: GetDocsIndexOptions) {
   const cards = harnesses.map((harness) => ({
     slug: harness.slug,
     name: harness.getName(lang),
     summary: harness.getSummary(lang),
-    protocol: harness.protocol,
+    protocol: PROTOCOL_LABELS[harness.protocol],
     href: `/${lang}/docs/${harness.slug}`
   }));
 
@@ -78,8 +56,9 @@ export function getDocsIndex({
     href: `/${lang}/docs/${harness.slug}`
   }));
 
-  const quickstart: DocsQuickstartStep[] = quickstartLoaders.map(
-    ({ title, text }) => ({ title: title(lang), text: text(lang) })
+  const quickstart: DocsQuickstartStep[] = getDocsKeyFlow(
+    lang,
+    quickstartLoaders
   );
 
   return { cards, endpoints, quickstart };
