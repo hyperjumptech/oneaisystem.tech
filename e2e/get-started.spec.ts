@@ -72,8 +72,27 @@ for (const locale of supportedLanguages) {
         page
       }) => {
         const table = page.locator("table").first();
-        await expect(table.getByText(ONEAI_ANTHROPIC_BASE_URL)).toBeVisible();
-        await expect(table.getByText(ONEAI_OPENAI_BASE_URL)).toBeVisible();
+
+        for (const harness of DOCS_HARNESSES) {
+          const row = table.getByRole("row").filter({
+            has: page.locator(
+              `a[href='/${locale}/get-started/${harness.slug}']`
+            )
+          });
+
+          await expect(row).toContainText(harness.baseUrl);
+        }
+
+        const countFor = (baseUrl: string) =>
+          DOCS_HARNESSES.filter((harness) => harness.baseUrl === baseUrl)
+            .length;
+
+        await expect(
+          table.getByRole("row").filter({ hasText: ONEAI_ANTHROPIC_BASE_URL })
+        ).toHaveCount(countFor(ONEAI_ANTHROPIC_BASE_URL));
+        await expect(
+          table.getByRole("row").filter({ hasText: ONEAI_OPENAI_BASE_URL })
+        ).toHaveCount(countFor(ONEAI_OPENAI_BASE_URL));
       });
 
       test("names the console as the OneAI dashboard without a domain link", async ({
