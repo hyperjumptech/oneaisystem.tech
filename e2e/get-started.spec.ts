@@ -4,7 +4,11 @@ import {
   DOCS_HARNESSES,
   DOCS_HARNESS_SLUGS
 } from "@/app/[lang]/(hyperjump)/get-started/docs-registry";
-import { ONEAI_CONSOLE_URL } from "@/app/[lang]/(hyperjump)/get-started/snippets";
+import {
+  ONEAI_ANTHROPIC_BASE_URL,
+  ONEAI_CONSOLE_URL,
+  ONEAI_OPENAI_BASE_URL
+} from "@/app/[lang]/(hyperjump)/get-started/snippets";
 import {
   docsCommonCopied,
   docsCommonCopy,
@@ -68,12 +72,8 @@ for (const locale of supportedLanguages) {
         page
       }) => {
         const table = page.locator("table").first();
-        await expect(
-          table.getByText("https://app.avenu.hyperjump.tech/anthropic")
-        ).toBeVisible();
-        await expect(
-          table.getByText("https://app.avenu.hyperjump.tech/v1")
-        ).toBeVisible();
+        await expect(table.getByText(ONEAI_ANTHROPIC_BASE_URL)).toBeVisible();
+        await expect(table.getByText(ONEAI_OPENAI_BASE_URL)).toBeVisible();
       });
 
       test("names the console as the OneAI dashboard without a domain link", async ({

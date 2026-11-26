@@ -3,7 +3,9 @@ import {
   docsClaudeCodeName,
   docsClaudeCodeSummary,
   docsOpencodeName,
-  docsOpencodeSummary
+  docsOpencodeSummary,
+  docsPiName,
+  docsPiSummary
 } from "@/locales/.generated/strings";
 
 import {
@@ -19,11 +21,15 @@ import {
   OPENCODE_COMMAND,
   OPENCODE_CONFIG_PATH,
   OPENCODE_CONFIG_SNIPPET,
-  OPENCODE_INSTALL_SNIPPET
+  OPENCODE_INSTALL_SNIPPET,
+  PI_COMMAND,
+  PI_CONFIG_PATH,
+  PI_INSTALL_SNIPPET,
+  PI_MODELS_SNIPPET
 } from "./snippets";
 
 /** Harness slugs that have a guide page under /[lang]/get-started/[slug]. */
-export type DocsHarnessSlug = "claude-code" | "opencode";
+export type DocsHarnessSlug = "claude-code" | "opencode" | "pi";
 
 /** Protocol family the harness speaks, which decides the OneAI base URL. */
 export type DocsProtocol = "anthropic" | "openai-compatible";
@@ -91,6 +97,20 @@ export const DOCS_HARNESSES: DocsHarness[] = [
     runSnippet: getRunSnippet(OPENCODE_COMMAND),
     getName: docsOpencodeName,
     getSummary: docsOpencodeSummary
+  },
+  {
+    slug: "pi",
+    command: PI_COMMAND,
+    protocol: "openai-compatible",
+    baseUrl: ONEAI_OPENAI_BASE_URL,
+    configPath: PI_CONFIG_PATH,
+    configLanguage: "json",
+    installSnippet: PI_INSTALL_SNIPPET,
+    versionSnippet: getVersionSnippet(PI_COMMAND),
+    configSnippet: PI_MODELS_SNIPPET,
+    runSnippet: getRunSnippet(PI_COMMAND),
+    getName: docsPiName,
+    getSummary: docsPiSummary
   }
 ];
 

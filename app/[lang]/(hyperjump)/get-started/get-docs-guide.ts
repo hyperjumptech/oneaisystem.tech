@@ -58,7 +58,28 @@ import {
   docsOpencodeVerifyCheck,
   docsOpencodeVerifyPrompt,
   docsOpencodeVerifyText,
-  docsOpencodeVerifyTitle
+  docsOpencodeVerifyTitle,
+  docsPiConfigureNote,
+  docsPiConfigureText,
+  docsPiConfigureTitle,
+  docsPiFields0Name,
+  docsPiFields0Text,
+  docsPiFields1Name,
+  docsPiFields1Text,
+  docsPiFields2Name,
+  docsPiFields2Text,
+  docsPiFields3Name,
+  docsPiFields3Text,
+  docsPiFields4Name,
+  docsPiFields4Text,
+  docsPiInstallNote,
+  docsPiInstallText,
+  docsPiInstallTitle,
+  docsPiPrerequisites,
+  docsPiVerifyCheck,
+  docsPiVerifyPrompt,
+  docsPiVerifyText,
+  docsPiVerifyTitle
 } from "@/locales/.generated/strings";
 
 import {
@@ -130,7 +151,15 @@ export type DocsGuide = {
   labels: DocsGuideLabels;
 };
 
-type StringLoader = (lang: SupportedLanguage) => string;
+/**
+ * Localized copy loader. Copy that names the OneAI endpoint carries a
+ * {{oneai_api_url}} placeholder, so every loader also receives the URL;
+ * loaders without a placeholder ignore the second argument.
+ */
+type StringLoader = (
+  lang: SupportedLanguage,
+  data: { oneai_api_url: string }
+) => string;
 
 type CopyLoaders = {
   prerequisites: StringLoader;
@@ -200,6 +229,27 @@ export const DOCS_GUIDE_COPY: Record<DocsHarnessSlug, CopyLoaders> = {
       { name: docsOpencodeFields4Name, text: docsOpencodeFields4Text },
       { name: docsOpencodeFields5Name, text: docsOpencodeFields5Text }
     ]
+  },
+  pi: {
+    prerequisites: docsPiPrerequisites,
+    installTitle: docsPiInstallTitle,
+    installText: docsPiInstallText,
+    installNote: docsPiInstallNote,
+    configureTitle: docsPiConfigureTitle,
+    configureText: docsPiConfigureText,
+    configureNote: docsPiConfigureNote,
+    verifyTitle: docsPiVerifyTitle,
+    verifyText: docsPiVerifyText,
+    verifyPrompt: docsPiVerifyPrompt,
+    verifyCheck: docsPiVerifyCheck,
+    fieldsLabel: docsCommonConfigFields,
+    fields: [
+      { name: docsPiFields0Name, text: docsPiFields0Text },
+      { name: docsPiFields1Name, text: docsPiFields1Text },
+      { name: docsPiFields2Name, text: docsPiFields2Text },
+      { name: docsPiFields3Name, text: docsPiFields3Text },
+      { name: docsPiFields4Name, text: docsPiFields4Text }
+    ]
   }
 };
 
@@ -243,20 +293,24 @@ export function getDocsGuide({
     return undefined;
   }
 
+  // Copy that names the OneAI endpoint reads {{oneai_api_url}}; other loaders ignore it.
+  const t = (loader: StringLoader) =>
+    loader(lang, { oneai_api_url: harness.baseUrl });
+
   return {
     harness,
     name: harness.getName(lang),
     summary: harness.getSummary(lang),
     setupLabel: docsCommonSetup(lang),
     prerequisitesLabel: docsCommonPrerequisites(lang),
-    prerequisites: copy.prerequisites(lang),
+    prerequisites: t(copy.prerequisites),
     keySteps: getDocsKeyFlow(lang, keyFlowLoaders),
     steps: [
       {
         id: "install",
-        title: copy.installTitle(lang),
-        text: copy.installText(lang),
-        note: copy.installNote(lang),
+        title: t(copy.installTitle),
+        text: t(copy.installText),
+        note: t(copy.installNote),
         codes: [
           {
             id: "install",
@@ -274,9 +328,9 @@ export function getDocsGuide({
       },
       {
         id: "configure",
-        title: copy.configureTitle(lang),
-        text: copy.configureText(lang),
-        note: copy.configureNote(lang),
+        title: t(copy.configureTitle),
+        text: t(copy.configureText),
+        note: t(copy.configureNote),
         codes: [
           {
             id: "config",
@@ -288,8 +342,8 @@ export function getDocsGuide({
       },
       {
         id: "verify",
-        title: copy.verifyTitle(lang),
-        text: copy.verifyText(lang),
+        title: t(copy.verifyTitle),
+        text: t(copy.verifyText),
         codes: [
           {
             id: "run",
@@ -299,32 +353,32 @@ export function getDocsGuide({
           },
           {
             id: "prompt",
-            code: copy.verifyPrompt(lang),
+            code: t(copy.verifyPrompt),
             label: "prompt",
             language: "text"
           }
         ],
-        footer: copy.verifyCheck(lang)
+        footer: t(copy.verifyCheck)
       }
     ],
-    fieldsLabel: copy.fieldsLabel(lang),
+    fieldsLabel: t(copy.fieldsLabel),
     fields: copy.fields.map(({ name, text }) => ({
-      name: name(lang),
-      text: text(lang)
+      name: t(name),
+      text: t(text)
     })),
     fieldColumns: {
       name: docsCommonColumnsVariable(lang),
       description: docsCommonColumnsDescription(lang)
     },
     extra: copy.extra
-      ? { title: copy.extra.title(lang), text: copy.extra.text(lang) }
+      ? { title: t(copy.extra.title), text: t(copy.extra.text) }
       : undefined,
     labels: {
-      step: labelLoaders.step(lang),
-      copy: labelLoaders.copy(lang),
-      copied: labelLoaders.copied(lang),
-      copyFailed: labelLoaders.copyFailed(lang),
-      note: labelLoaders.note(lang)
+      step: t(labelLoaders.step),
+      copy: t(labelLoaders.copy),
+      copied: t(labelLoaders.copied),
+      copyFailed: t(labelLoaders.copyFailed),
+      note: t(labelLoaders.note)
     }
   };
 }

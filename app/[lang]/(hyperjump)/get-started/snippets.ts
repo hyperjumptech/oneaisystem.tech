@@ -8,10 +8,19 @@
 /** Syntax hint for a code block, matching the file it came from. */
 export type DocsCodeLanguage = "bash" | "json" | "jsonc" | "text";
 
-export const ONEAI_CONSOLE_URL = "https://app.avenu.hyperjump.tech/";
-export const ONEAI_ANTHROPIC_BASE_URL =
-  "https://app.avenu.hyperjump.tech/anthropic";
-export const ONEAI_OPENAI_BASE_URL = "https://app.avenu.hyperjump.tech/v1";
+/** Host of the OneAI deployment every docs URL is built from. */
+export const ONEAI_API_HOST = "https://CONTACT_ONEAI_FOR_API";
+
+export const ONEAI_CONSOLE_URL = `${ONEAI_API_HOST}/`;
+export const ONEAI_ANTHROPIC_BASE_URL = `${ONEAI_API_HOST}/anthropic`;
+export const ONEAI_OPENAI_BASE_URL = `${ONEAI_API_HOST}/v1`;
+
+/**
+ * Template key used in locale copy wherever the guide names a OneAI endpoint.
+ * The guide builder fills it from the harness's baseUrl, so the host appears
+ * in one place only.
+ */
+export const ONEAI_API_URL_KEY = "oneai_api_url";
 
 /** Placeholder the reader replaces with the key they copied from OneAI. */
 export const VIRTUAL_KEY_PLACEHOLDER = "YOUR_VIRTUAL_KEY";
@@ -85,6 +94,45 @@ export const OPENCODE_CONFIG_SNIPPET = `{
           "name": "DeepSeek V4.1 Flash"
         }
       }
+    }
+  }
+}`;
+
+export const PI_INSTALL_SNIPPET = `curl -fsSL https://pi.dev/install.sh | sh`;
+
+/** CLI binary Pi installs and the reader runs. */
+export const PI_COMMAND = "pi";
+
+/** Pi's agent directory holds models.json, and defaults to this path. */
+export const PI_CONFIG_PATH = "~/.pi/agent/models.json";
+
+/** Pi provider key. It becomes the prefix of every model reference. */
+export const PI_PROVIDER_ID = "oneai";
+
+/**
+ * Pi reads custom providers from models.json. A provider needs a baseUrl and
+ * an api, and each model needs an id. The config file holds the key in plain
+ * text, so it must stay out of version control. `/model` reloads the file,
+ * so an edit takes effect without restarting Pi.
+ */
+export const PI_MODELS_SNIPPET = `{
+  "$schema": "https://pi.dev/schemas/models.schema.json",
+  "providers": {
+    "${PI_PROVIDER_ID}": {
+      "name": "OneAI",
+      "baseUrl": "${ONEAI_OPENAI_BASE_URL}",
+      "api": "openai-completions",
+      "apiKey": "${VIRTUAL_KEY_PLACEHOLDER}",
+      "models": [
+        {
+          "id": "${ONEAI_DEEPSEEK_FLASH_MODEL}",
+          "name": "DeepSeek V4.1 Flash"
+        },
+        {
+          "id": "${ONEAI_DEEPSEEK_PRO_MODEL}",
+          "name": "DeepSeek V4 Pro"
+        }
+      ]
     }
   }
 }`;

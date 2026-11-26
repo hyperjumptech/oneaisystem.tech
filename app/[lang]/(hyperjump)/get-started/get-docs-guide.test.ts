@@ -229,6 +229,29 @@ describe("getDocsGuide", () => {
     ).toBeUndefined();
   });
 
+  it("fills the api url placeholder with the harness endpoint", () => {
+    for (const slug of DOCS_HARNESS_SLUGS) {
+      for (const lang of supportedLanguages) {
+        const guide = getDocsGuide({ lang, slug })!;
+        const baseUrl = guide.harness.baseUrl;
+        const texts = [
+          guide.prerequisites,
+          ...guide.steps.flatMap((step) => [
+            step.title,
+            step.text,
+            step.note ?? "",
+            step.footer ?? ""
+          ]),
+          ...guide.fields.map((field) => field.text),
+          guide.extra?.text ?? ""
+        ];
+
+        expect(texts.join(" ")).not.toContain("{{");
+        expect(texts.some((text) => text.includes(baseUrl))).toBe(true);
+      }
+    }
+  });
+
   it("translates the guide for the Indonesian locale", () => {
     const en = getDocsGuide({ lang: "en", slug: "opencode" });
     const id = getDocsGuide({ lang: "id", slug: "opencode" });
