@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "title": "Mulai dengan OneAI: Hubungkan OneAI ke Agen Coding Anda | Hyperjump",
+    "description": "Arahkan Claude Code, OpenCode, Pi, dan agen coding terminal lain lewat OneAI dengan satu virtual key. Panduan langkah demi langkah untuk endpoint kompatibel Anthropic dan kompatibel OpenAI."
+  },
+  "index": {
+    "eyebrow": "Dokumentasi",
+    "heading": "Hubungkan OneAI ke agen coding Anda",
+    "lede": "Agen coding terminal seperti Claude Code, OpenCode, dan Pi bisa mengirim permintaan model ke OneAI, bukan ke API vendor. Satu virtual key, satu anggaran, dan model yang disetujui perusahaan tetap dipakai di alat yang sudah digunakan engineer Anda.",
+    "quickstart_label": "Sebelum mulai",
+    "quickstart_heading": "Buat virtual key",
+    "harnesses_label": "Agen coding yang didukung",
+    "harnesses_heading": "Pilih agen coding yang sudah dipakai tim Anda",
+    "endpoints_label": "Endpoint",
+    "endpoints_heading": "Pilih endpoint yang cocok dengan alat Anda",
+    "endpoints_desc": "OneAI menyediakan dua API kompatibel. Alat bergaya Anthropic memakai path /anthropic, alat bergaya OpenAI memakai path /v1. Keduanya menerima virtual key yang sama.",
+    "endpoints_columns": {
+      "harness": "Agen coding",
+      "protocol": "Protokol",
+      "base_url": "Base URL"
+    },
+    "security_heading": "Jangan simpan key di repositori",
+    "security_text": "Jangan pernah commit virtual key ke git. Simpan di profil shell, secret manager, atau file konfigurasi alat di luar repositori. Kalau key bocor, cabut di dasbor OneAI lalu buat yang baru.",
+    "cta_heading": "Agen coding Anda belum ada di sini?",
+    "cta_desc": "Beri tahu alat yang dipakai tim Anda, kami akan menulis panduannya.",
+    "cta": "Hubungi {{email}}",
+    "console_cta": "Buka dasbor OneAI",
+    "sidebar": {
+      "overview": "Ringkasan",
+      "coding_agents": "Agen coding"
+    },
+    "toc": {
+      "label": "Di halaman ini",
+      "virtual_key": "Buat virtual key",
+      "coding_agents": "Agen coding",
+      "endpoints": "Endpoint",
+      "security": "Keamanan",
+      "support": "Hubungi kami"
+    }
+  },
+  "mailto": {
+    "subject": "Permintaan panduan setup OneAI",
+    "body": "Halo tim Hyperjump,\n\nTim kami memakai ___ dan ingin meminta panduan setup OneAI untuk alat tersebut.\n\nPerusahaan:\nNama:\nAlat:\n\nCatatan tambahan:\n"
+  },
+  "common": {
+    "prerequisites": "Prasyarat",
+    "setup": "Penyiapan",
+    "step": "Langkah",
+    "copy": "Salin",
+    "copied": "Tersalin",
+    "copy_failed": "Gagal menyalin",
+    "note": "Catatan",
+    "config_fields": "Field konfigurasi",
+    "environment": "Variabel environment",
+    "key_flow": {
+      "0": {
+        "title": "Buka dasbor OneAI",
+        "text": "Masuk sebagai User atau Operator di dasbor OneAI."
+      },
+      "1": {
+        "title": "Beri nama key dan batas penggunannya",
+        "text": "Buka Virtual Keys dari menu navigasi lalu pilih Create New Virtual Key. Beri nama key supaya tim mudah mengenalinya, izinkan hanya model yang boleh dipanggil, dan tentukan anggaran yang boleh dipakai. Model yang tidak diizinkan tidak bisa dipanggil oleh key ini."
+      },
+      "2": {
+        "title": "Simpan key sekarang",
+        "text": "Key hanya ditampilkan saat dibuat. Simpan di password manager. Perlakukan seperti password: siapa pun yang memegangnya bisa memakai anggaran Anda."
+      }
+    },
+    "key_flow_note": "Kalau key hilang, cabut di Virtual Keys lalu buat yang baru. Jangan pernah commit ke git.",
+    "all_guides": "Semua panduan",
+    "back_to_docs": "Kembali ke dokumentasi",
+    "previous_guide": "Sebelumnya",
+    "next_guide": "Berikutnya",
+    "columns": {
+      "variable": "Pengaturan",
+      "description": "Keterangan"
+    }
+  },
+  "claude_code": {
+    "name": "Claude Code",
+    "summary": "Agen coding terminal dari Anthropic. OneAI mengimplementasikan Anthropic Messages API, jadi Claude Code hanya butuh auth token, base URL, dan empat ID model.",
+    "prerequisites": "Akun OneAI aktif, mesin Linux atau macOS, serta curl dan bash terpasang.",
+    "install_title": "Pasang Claude Code",
+    "install_text": "Jalankan installer resmi, lalu pastikan binary-nya ada di PATH.",
+    "install_note": "Kalau perintah claude tidak ditemukan, restart terminal atau muat ulang profil shell dengan source ~/.bashrc atau source ~/.zshrc.",
+    "configure_title": "Arahkan Claude Code ke OneAI",
+    "configure_text": "Claude Code membaca variabel ANTHROPIC_* dari blok env di ~/.claude/settings.json. Buat filenya kalau belum ada, lalu gabungkan blok berikut.",
+    "configure_note": "Kalau settings.json sudah punya objek env, tambahkan key berikut ke objek itu, jangan ganti seluruh file. Edit file di direktori home Anda, bukan .claude/settings.json di dalam proyek, karena file proyek biasanya ikut di-commit ke git.",
+    "env": {
+      "0": {
+        "name": "ANTHROPIC_AUTH_TOKEN",
+        "text": "Virtual key OneAI Anda. OneAI mengautentikasi lewat variabel ini, jadi tidak perlu API key Anthropic."
+      },
+      "1": {
+        "name": "ANTHROPIC_BASE_URL",
+        "text": "Endpoint kompatibel Anthropic milik OneAI. Permintaan dikirim ke {{oneai_api_url}}."
+      },
+      "2": {
+        "name": "ANTHROPIC_MODEL",
+        "text": "Model untuk sesi utama. Ini model yang dipakai Claude Code untuk pekerjaan yang Anda minta."
+      },
+      "3": {
+        "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "text": "Model untuk alias Opus. Claude Code memakainya untuk permintaan kelas Opus dan untuk perencanaan pada mode opusplan."
+      },
+      "4": {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "text": "Model untuk alias Sonnet. Claude Code memakainya untuk permintaan kelas Sonnet dan untuk eksekusi pada mode opusplan."
+      },
+      "5": {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "text": "Model untuk alias Haiku. Claude Code memakainya untuk pekerjaan latar belakang yang cepat seperti judul percakapan dan ringkasan."
+      }
+    },
+    "models_title": "Tentang ID model",
+    "models_text": "ID model memakai path provider yang diekspos OneAI, misalnya default/deepseek/deepseek-v4-pro. Semua ID model yang Anda set harus diizinkan oleh virtual key Anda, kalau tidak permintaan gagal dengan error model-not-allowed. Pakai ID yang sama di beberapa variabel kalau ingin semua tier memakai model yang sama.",
+    "verify_title": "Cek base URL, lalu kirim prompt uji",
+    "verify_text": "Buka direktori proyek, jalankan Claude Code, lalu jalankan /status. Di sana harus tampil {{oneai_api_url}} sebagai base URL. Kalau URL-nya yang lain, Claude Code masih bicara dengan Anthropic, jadi perbaiki file-nya dulu sebelum lanjut. Setelah itu tempel prompt uji di bawah.",
+    "verify_prompt": "Balas dengan satu kata READY dan jangan tambahkan apa pun.",
+    "verify_check": "Jawaban saja tidak membuktikan model mana yang berjalan, dan jawaban tanpa error tidak membuktikan apa pun: sesi yang masih login ke Anthropic tetap membalas sama saja. Buka LLM Logs di dasbor OneAI lalu baca permintaan terbaru: itu harus prompt yang baru saja Anda kirim, kolom Provider harus berisi default, dan kolom Model harus menampilkan salah satu ID model yang Anda konfigurasi. Log itu ditulis oleh OneAI sendiri, jadi itu pemeriksaan yang otoritatif."
+  },
+  "opencode": {
+    "name": "OpenCode",
+    "summary": "Agen terminal open-source dengan registri provider yang bisa dikonfigurasi. OneAI dipasang sebagai provider kompatibel OpenAI kustom.",
+    "prerequisites": "Akun OneAI aktif, mesin Linux atau macOS, serta curl dan bash terpasang.",
+    "install_title": "Pasang OpenCode",
+    "install_text": "Jalankan installer resmi, lalu pastikan binary-nya ada di PATH.",
+    "install_note": "Kalau perintah opencode tidak ditemukan, restart terminal atau muat ulang profil shell dengan source ~/.bashrc atau source ~/.zshrc.",
+    "configure_title": "Daftarkan OneAI sebagai provider",
+    "configure_text": "OpenCode membaca provider dari peta providers di ~/.config/opencode/. Tambahkan entri OneAI di sana, dengan virtual key OneAI Anda sebagai nilai apiKey. Blok di bawah ini JSON yang valid, jadi bisa dipakai di opencode.json juga.",
+    "configure_note": "Tambahkan entri ke file konfigurasi yang sudah Anda pakai di ~/.config/opencode/, opencode.json atau opencode.jsonc, dan buat opencode.jsonc hanya kalau keduanya belum ada. Jangan menyimpan kedua file sekaligus: kalau opencode.json dan opencode.jsonc ada berdekatan, tidak jelas mana yang dibaca OpenCode. Kalau file itu sudah berisi provider, tambahkan OneAI di sampingnya di dalam peta providers, jangan ganti file. File ini sekarang menyimpan virtual key Anda, jadi simpan di direktori home, bukan di folder proyek yang biasanya ikut di-commit ke git.",
+    "fields": {
+      "0": {
+        "name": "package",
+        "text": "Adapter @opencode/ai/providers/openai-compatible. Ini yang membuat OpenCode bisa bicara dengan endpoint kompatibel OpenAI, termasuk OneAI."
+      },
+      "1": {
+        "name": "name",
+        "text": "Nama tampilan di pemilih model OpenCode. Biarkan OneAI supaya sumbernya jelas."
+      },
+      "2": {
+        "name": "settings.baseURL",
+        "text": "Endpoint kompatibel OpenAI milik OneAI di {{oneai_api_url}}."
+      },
+      "3": {
+        "name": "settings.apiKey",
+        "text": "Virtual key OneAI Anda. OpenCode mengirim nilai ini sebagai API key pada setiap permintaan ke OneAI. Jangan masukkan opencode.jsonc ke version control, karena file ini menyimpan key dalam bentuk teks biasa."
+      },
+      "4": {
+        "name": "models",
+        "text": "ID model yang ingin diekspos, masing-masing dengan label yang mudah dibaca. Tambahkan sebanyak yang diizinkan virtual key Anda."
+      },
+      "5": {
+        "name": "model",
+        "text": "Model default tingkat atas, ditulis sebagai provider/model. Di sini memilih oneai/default/deepseek/deepseek-v4.1-flash, jadi OpenCode langsung jalan dengan OneAI tanpa memilih model secara manual."
+      }
+    },
+    "verify_title": "Cek provider, lalu kirim prompt",
+    "verify_text": "Jalankan OpenCode lalu buka pemilih model. Model yang aktif harus model OneAI yang sudah Anda set sebagai default, yaitu entri yang diawali oneai/. Kalau modelnya dari provider lain, OpenCode belum memakai provider OneAI. Model default sudah diarahkan ke OneAI, jadi tidak perlu memilih model secara manual. Setelah itu tempel prompt uji di bawah.",
+    "verify_prompt": "Balas dengan satu kata READY dan jangan tambahkan apa pun.",
+    "verify_check": "Jawaban saja tidak membuktikan model mana yang berjalan, dan jawaban tanpa error tidak membuktikan apa pun: sesi yang masih diarahkan ke provider lain tetap membalas sama saja. Buka LLM Logs di dasbor OneAI lalu baca permintaan terbaru: itu harus prompt yang baru saja Anda kirim, kolom Provider harus berisi default, dan kolom Model harus menampilkan salah satu ID model yang Anda konfigurasi. Log itu ditulis oleh OneAI sendiri, jadi itu pemeriksaan yang otoritatif."
+  },
+  "pi": {
+    "name": "Pi",
+    "summary": "Harness agen terminal minimal dengan file provider JSON biasa. OneAI dipasang sebagai provider kompatibel OpenAI kustom.",
+    "prerequisites": "Akun OneAI aktif, mesin Linux atau macOS, serta curl dan sh terpasang.",
+    "install_title": "Pasang Pi",
+    "install_text": "Jalankan installer resmi, lalu pastikan binary-nya ada di PATH. Alternatif npm adalah npm install -g --ignore-scripts @earendil-works/pi-coding-agent, yang membutuhkan Node.js 22.19 atau lebih baru.",
+    "install_note": "Kalau perintah pi tidak ditemukan, restart terminal atau muat ulang profil shell dengan source ~/.bashrc atau source ~/.zshrc.",
+    "configure_title": "Daftarkan OneAI sebagai provider",
+    "configure_text": "Pi membaca provider kustom dari peta providers di models.json dalam direktori agennya. Tambahkan entri OneAI di sana dengan virtual key OneAI Anda sebagai nilai apiKey, lalu buka /model di Pi untuk memilih model OneAI.",
+    "configure_note": "Direktori agen default-nya ~/.pi/agent, jadi file-nya ~/.pi/agent/models.json. Buat file itu kalau belum ada. Kalau file itu sudah berisi provider, tambahkan OneAI di sampingnya di dalam peta providers, jangan ganti file. Pi memuat ulang file saat Anda membuka /model, jadi tidak perlu restart. File ini menyimpan virtual key dalam teks biasa, jadi simpan di direktori home, bukan di folder proyek yang biasanya ikut di-commit ke git.",
+    "fields": {
+      "0": {
+        "name": "name",
+        "text": "Nama tampilan provider di pemilih model Pi. Biarkan OneAI supaya sumbernya jelas."
+      },
+      "1": {
+        "name": "baseUrl",
+        "text": "Endpoint kompatibel OpenAI milik OneAI di {{oneai_api_url}}."
+      },
+      "2": {
+        "name": "api",
+        "text": "API runtime yang dipakai Pi untuk bicara dengan endpoint. openai-completions cocok dengan endpoint /v1 milik OneAI."
+      },
+      "3": {
+        "name": "apiKey",
+        "text": "Virtual key OneAI Anda. Pi mengirimnya pada setiap permintaan ke OneAI. Nilainya bisa key literal, interpolasi environment $NAME, atau output !command, jadi key bisa disimpan di environment, bukan di file."
+      },
+      "4": {
+        "name": "models",
+        "text": "ID model yang ingin diekspos, masing-masing dengan label yang mudah dibaca. Tambahkan sebanyak yang diizinkan virtual key Anda."
+      }
+    },
+    "verify_title": "Pilih model OneAI, lalu kirim prompt",
+    "verify_text": "Jalankan Pi lalu buka pemilih model dengan /model. Daftarnya harus menampilkan model OneAI yang Anda konfigurasi, di bawah provider OneAI. Tekan Ctrl+S pada salah satunya untuk menjadikannya default sesi baru, atau pilih per run dengan --model oneai/default/deepseek/deepseek-v4.1-flash. Setelah itu tempel prompt uji di bawah.",
+    "verify_prompt": "Balas dengan satu kata READY dan jangan tambahkan apa pun.",
+    "verify_check": "Jawaban saja tidak membuktikan model mana yang berjalan, dan jawaban tanpa error tidak membuktikan apa pun: sesi yang masih diarahkan ke provider lain tetap membalas sama saja. Buka LLM Logs di dasbor OneAI lalu baca permintaan terbaru: itu harus prompt yang baru saja Anda kirim, kolom Provider harus berisi default, dan kolom Model harus menampilkan salah satu ID model yang Anda konfigurasi. Log itu ditulis oleh OneAI sendiri, jadi itu pemeriksaan yang otoritatif."
+  }
+}
