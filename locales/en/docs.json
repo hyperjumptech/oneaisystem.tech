@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "OneAI Docs: Connect OneAI to Your Coding Agent | Hyperjump",
+    "title": "Get Started with OneAI: Connect OneAI to Your Coding Agent | Hyperjump",
     "description": "Route Claude Code, OpenCode, and other terminal coding agents through OneAI with one virtual key. Step-by-step setup for the Anthropic-compatible and OpenAI-compatible endpoints."
   },
   "index": {
@@ -20,11 +20,23 @@
       "base_url": "Base URL"
     },
     "security_heading": "Keep the key out of your repository",
-    "security_text": "Never commit a virtual key to git. Keep it in your shell profile, a secret manager, or the tool's own config file outside the repository. If a key leaks, revoke it in the OneAI console and create a new one.",
+    "security_text": "Never commit a virtual key to git. Keep it in your shell profile, a secret manager, or the tool's own config file outside the repository. If a key leaks, revoke it in the OneAI dashboard and create a new one.",
     "cta_heading": "Coding agent not listed?",
     "cta_desc": "Tell us which tool your team uses and we will write the setup guide for it.",
     "cta": "Contact {{email}}",
-    "console_cta": "Open the OneAI console"
+    "console_cta": "Open the OneAI dashboard",
+    "sidebar": {
+      "overview": "Overview",
+      "coding_agents": "Coding agents"
+    },
+    "toc": {
+      "label": "On this page",
+      "virtual_key": "Create a virtual key",
+      "coding_agents": "Coding agents",
+      "endpoints": "Endpoints",
+      "security": "Security",
+      "support": "Get in touch"
+    }
   },
   "mailto": {
     "subject": "OneAI setup guide request",
@@ -42,8 +54,8 @@
     "environment": "Environment variables",
     "key_flow": {
       "0": {
-        "title": "Open the OneAI console",
-        "text": "Sign in as a User or Operator at {console}."
+        "title": "Open the OneAI dashboard",
+        "text": "Sign in as a User or Operator in the OneAI dashboard."
       },
       "1": {
         "title": "Name the key and set its limits",
@@ -105,7 +117,7 @@
     "verify_title": "Check the base URL, then send a test prompt",
     "verify_text": "Open a project directory, start Claude Code, and run /status. It must show https://app.avenu.hyperjump.tech/anthropic as the base URL. Any other URL means Claude Code is still talking to Anthropic, so fix the file before you continue. Then paste the test prompt below.",
     "verify_prompt": "Reply with the single word READY and nothing else.",
-    "verify_check": "The reply alone does not prove which model ran, and a reply with no error proves nothing at all: a session still logged in to Anthropic replies just the same. Open LLM Logs in the OneAI console at {console} and read the newest request: it must be the prompt you just sent, its Provider column must say default, and its Model column must show one of the model IDs you configured. OneAI writes that log itself, so it is the authoritative check."
+    "verify_check": "The reply alone does not prove which model ran, and a reply with no error proves nothing at all: a session still logged in to Anthropic replies just the same. Open LLM Logs in the OneAI dashboard and read the newest request: it must be the prompt you just sent, its Provider column must say default, and its Model column must show one of the model IDs you configured. OneAI writes that log itself, so it is the authoritative check."
   },
   "opencode": {
     "name": "OpenCode",
@@ -146,6 +158,6 @@
     "verify_title": "Check the provider, then send a prompt",
     "verify_text": "Start OpenCode and open the model picker. The selected model must be the OneAI model you set as the default, the entry that starts with oneai/. A model from another provider means OpenCode is not using the OneAI provider. The default model is already set, so no model picking is needed. Then paste the test prompt below.",
     "verify_prompt": "Reply with the single word READY and nothing else.",
-    "verify_check": "The reply alone does not prove which model ran, and a reply with no error proves nothing at all: a session still pointed at another provider replies just the same. Open LLM Logs in the OneAI console at {console} and read the newest request: it must be the prompt you just sent, its Provider column must say default, and its Model column must show one of the model IDs you configured. OneAI writes that log itself, so it is the authoritative check."
+    "verify_check": "The reply alone does not prove which model ran, and a reply with no error proves nothing at all: a session still pointed at another provider replies just the same. Open LLM Logs in the OneAI dashboard and read the newest request: it must be the prompt you just sent, its Provider column must say default, and its Model column must show one of the model IDs you configured. OneAI writes that log itself, so it is the authoritative check."
   }
 }

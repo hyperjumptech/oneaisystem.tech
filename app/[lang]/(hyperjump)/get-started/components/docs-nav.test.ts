@@ -12,11 +12,11 @@ import { DOCS_HARNESSES } from "../docs-registry";
 import { DocsNav, getDocsNavNeighbours } from "./docs-nav";
 
 /**
- * Collects the /docs/<slug> targets of a rendered nav, ignoring the
+ * Collects the /get-started/<slug> targets of a rendered nav, ignoring the
  * "all guides" link back to the hub.
  */
 function getGuideTargets(html: string): string[] {
-  return [...html.matchAll(/href="\/[^"]*\/docs\/([^"]+)"/g)].map(
+  return [...html.matchAll(/href="\/[^"]*\/get-started\/([^"]+)"/g)].map(
     (match) => match[1]
   );
 }

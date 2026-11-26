@@ -17,7 +17,7 @@ describe("getDocsIndex", () => {
     const { cards } = getDocsIndex({ lang: "id" });
 
     for (const card of cards) {
-      expect(card.href).toBe(`/id/docs/${card.slug}`);
+      expect(card.href).toBe(`/id/get-started/${card.slug}`);
     }
   });
 
@@ -41,7 +41,7 @@ describe("getDocsIndex", () => {
     const { quickstart } = getDocsIndex({ lang: "en" });
 
     expect(quickstart).toHaveLength(3);
-    expect(quickstart[0].title).toBe("Open the OneAI console");
+    expect(quickstart[0].title).toBe("Open the OneAI dashboard");
   });
 
   it("covers every harness slug", () => {

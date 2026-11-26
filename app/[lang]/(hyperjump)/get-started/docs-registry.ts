@@ -22,7 +22,7 @@ import {
   OPENCODE_INSTALL_SNIPPET
 } from "./snippets";
 
-/** Harness slugs that have a guide page under /[lang]/docs/[slug]. */
+/** Harness slugs that have a guide page under /[lang]/get-started/[slug]. */
 export type DocsHarnessSlug = "claude-code" | "opencode";
 
 /** Protocol family the harness speaks, which decides the OneAI base URL. */
@@ -102,7 +102,7 @@ export const DOCS_HARNESS_SLUGS: DocsHarnessSlug[] = DOCS_HARNESSES.map(
 /**
  * Looks up a harness by slug.
  *
- * @param slug - Route segment from /[lang]/docs/[slug]
+ * @param slug - Route segment from /[lang]/get-started/[slug]
  * @param harnesses - Harness list for DI
  * @returns Matching harness, or undefined when the slug is unknown
  */

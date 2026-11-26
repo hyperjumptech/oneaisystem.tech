@@ -16,7 +16,7 @@ export const ONEAI_OG_IMAGE_PATH = "/images/oneai/og.png";
 export type BuildLocalizedMetadataOptions = {
   /** Active locale. */
   lang: SupportedLanguage;
-  /** Path below the locale segment, e.g. "/docs/claude-code". */
+  /** Path below the locale segment, e.g. "/get-started/claude-code". */
   path?: string;
   title: string;
   description: string;

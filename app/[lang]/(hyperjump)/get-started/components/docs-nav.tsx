@@ -59,7 +59,7 @@ export function DocsNav({
   return (
     <nav className="mt-16 border-t border-black/6 pt-8">
       <Link
-        href={`/${lang}/docs`}
+        href={`/${lang}/get-started`}
         data-testid="docs-nav-back"
         className="text-hyperjump-blue mb-6 inline-flex items-center gap-1.5 text-sm font-medium hover:underline">
         <ArrowLeftIcon className="h-4 w-4" aria-hidden />
@@ -110,7 +110,7 @@ function DocsNavCard({
   return (
     <Link
       data-testid={`docs-nav-${direction}-${harness.slug}`}
-      href={`/${lang}/docs/${harness.slug}`}
+      href={`/${lang}/get-started/${harness.slug}`}
       className="group hover:border-hyperjump-blue/40 flex flex-col rounded-xl border border-black/8 px-5 py-4 transition-colors hover:bg-black/[0.02]">
       <span className="text-hyperjump-muted mb-1 inline-flex items-center gap-1.5 text-xs font-medium">
         {isPrevious ? (

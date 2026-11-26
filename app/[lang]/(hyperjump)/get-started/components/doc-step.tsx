@@ -2,8 +2,6 @@ import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-import { ConsoleLinkText } from "./console-link";
-
 type DocStepProps = {
   /** Stable identifier used by tests, independent of the step order. */
   id: string;
@@ -47,7 +45,7 @@ export function DocStep({
         {title}
       </h3>
       <p className="text-hyperjump-gray mb-4 text-[15px] leading-relaxed">
-        <ConsoleLinkText text={text} />
+        {text}
       </p>
       {note && (
         <p
@@ -58,13 +56,13 @@ export function DocStep({
           <span className="text-hyperjump-black font-semibold">
             {noteLabel}:{" "}
           </span>
-          <ConsoleLinkText text={note} />
+          {note}
         </p>
       )}
       {children}
       {footer && (
         <p className="text-hyperjump-gray mt-4 text-sm leading-relaxed">
-          <ConsoleLinkText text={footer} />
+          {footer}
         </p>
       )}
     </li>

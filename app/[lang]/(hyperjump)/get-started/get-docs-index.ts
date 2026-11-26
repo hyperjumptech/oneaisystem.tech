@@ -46,14 +46,14 @@ export function getDocsIndex({
     name: harness.getName(lang),
     summary: harness.getSummary(lang),
     protocol: PROTOCOL_LABELS[harness.protocol],
-    href: `/${lang}/docs/${harness.slug}`
+    href: `/${lang}/get-started/${harness.slug}`
   }));
 
   const endpoints: DocsEndpointRow[] = harnesses.map((harness) => ({
     name: harness.getName(lang),
     protocol: PROTOCOL_LABELS[harness.protocol],
     baseUrl: harness.baseUrl,
-    href: `/${lang}/docs/${harness.slug}`
+    href: `/${lang}/get-started/${harness.slug}`
   }));
 
   const quickstart: DocsQuickstartStep[] = getDocsKeyFlow(

@@ -3,18 +3,20 @@ import { test, expect } from "@playwright/test";
 import {
   DOCS_HARNESSES,
   DOCS_HARNESS_SLUGS
-} from "@/app/[lang]/(hyperjump)/docs/docs-registry";
-import { ONEAI_CONSOLE_URL } from "@/app/[lang]/(hyperjump)/docs/snippets";
+} from "@/app/[lang]/(hyperjump)/get-started/docs-registry";
+import { ONEAI_CONSOLE_URL } from "@/app/[lang]/(hyperjump)/get-started/snippets";
 import {
   docsCommonCopied,
   docsCommonCopy,
   docsCommonCopyFailed,
+  docsCommonKeyFlow0Text,
   docsIndexConsoleCta,
   docsIndexHeading,
+  docsIndexTocLabel,
   docsMailtoBody,
   docsMailtoSubject
 } from "@/locales/.generated/strings";
-import { oneaiNavDocs } from "@/locales/.generated/server";
+import { oneaiNavGetStarted } from "@/locales/.generated/server";
 import { supportedLanguages } from "@/locales/.generated/types";
 
 import {
@@ -27,10 +29,10 @@ import {
 } from "./shared-test";
 
 for (const locale of supportedLanguages) {
-  test.describe(`OneAI Docs - ${locale.toUpperCase()}`, () => {
-    test.describe("Docs hub", () => {
+  test.describe(`OneAI Get Started - ${locale.toUpperCase()}`, () => {
+    test.describe("Get Started hub", () => {
       test.beforeEach(async ({ page }) => {
-        await gotoAndWait(page, `${BASE_URL}/${locale}/docs`);
+        await gotoAndWait(page, `${BASE_URL}/${locale}/get-started`);
       });
 
       test.describe("Header", headerTest(locale));
@@ -41,11 +43,24 @@ for (const locale of supportedLanguages) {
         await expect(page.locator("h1")).toHaveText(docsIndexHeading(locale));
       });
 
+      test("nav uses the static scrolled design without transitions", async ({
+        page
+      }) => {
+        const header = page.locator("header").first();
+
+        await expect(header).toHaveClass(/bg-white/);
+        await expect(header).not.toHaveClass(/transition/);
+        await expect(header.locator('img[src*="logo-on-light"]')).toBeVisible();
+      });
+
       test("links every harness card to its guide", async ({ page }) => {
         for (const { slug } of DOCS_HARNESSES) {
           const card = page.getByTestId(`docs-harness-card-${slug}`);
           await expect(card).toBeVisible();
-          await expect(card).toHaveAttribute("href", `/${locale}/docs/${slug}`);
+          await expect(card).toHaveAttribute(
+            "href",
+            `/${locale}/get-started/${slug}`
+          );
         }
       });
 
@@ -61,14 +76,15 @@ for (const locale of supportedLanguages) {
         ).toBeVisible();
       });
 
-      test("links the console domain to the OneAI app", async ({ page }) => {
-        const link = page.getByTestId("docs-console-link").first();
-        await expect(link).toBeVisible();
-        await expect(link).toHaveText("app.avenu.hyperjump.tech");
-        await expect(link).toHaveAttribute(
-          "href",
-          "https://app.avenu.hyperjump.tech/"
+      test("names the console as the OneAI dashboard without a domain link", async ({
+        page
+      }) => {
+        await expect(page.locator("article")).toContainText(
+          docsCommonKeyFlow0Text(locale)
         );
+        await expect(
+          page.getByRole("link", { name: /app\.avenu\.hyperjump\.tech/ })
+        ).toHaveCount(0);
       });
 
       test("offers an explicit console CTA under the quickstart", async ({
@@ -88,13 +104,13 @@ for (const locale of supportedLanguages) {
         expect(href).toContain(encodeURIComponent(docsMailtoBody(locale)));
       });
 
-      test("nav exposes the docs entry", async ({ page }) => {
+      test("nav exposes the get-started entry", async ({ page }) => {
         const header = page.locator("header, nav").first();
         await expect(
-          header.locator(`a[href='/${locale}/docs']`).first()
+          header.locator(`a[href='/${locale}/get-started']`).first()
         ).toBeVisible();
         await expect(
-          header.getByText(oneaiNavDocs(locale), { exact: true }).first()
+          header.getByText(oneaiNavGetStarted(locale), { exact: true }).first()
         ).toBeVisible();
       });
 
@@ -113,15 +129,42 @@ for (const locale of supportedLanguages) {
       const harness = DOCS_HARNESSES.find((item) => item.slug === slug)!;
       const name = harness.getName(locale);
 
-      test.describe(`Docs guide: ${name}`, () => {
+      test.describe(`Get Started guide: ${name}`, () => {
         test.beforeEach(async ({ page }) => {
-          await gotoAndWait(page, `${BASE_URL}/${locale}/docs/${slug}`);
+          await gotoAndWait(page, `${BASE_URL}/${locale}/get-started/${slug}`);
         });
 
         test("renders the harness name as the page heading", async ({
           page
         }) => {
           await expect(page.locator("h1")).toHaveText(name);
+        });
+
+        test("nav uses the static scrolled design without transitions", async ({
+          page
+        }) => {
+          const header = page.locator("header").first();
+
+          await expect(header).toHaveClass(/bg-white/);
+          await expect(header).not.toHaveClass(/transition/);
+          await expect(
+            header.locator('img[src*="logo-on-light"]')
+          ).toBeVisible();
+        });
+
+        test("uses the same sidebar and on-this-page shell as the hub", async ({
+          page
+        }) => {
+          const sidebar = page
+            .getByRole("navigation", { name: oneaiNavGetStarted(locale) })
+            .first();
+
+          await expect(
+            sidebar.locator(`a[href='/${locale}/get-started/${slug}']`)
+          ).toHaveAttribute("aria-current", "page");
+          await expect(
+            page.getByRole("navigation", { name: docsIndexTocLabel(locale) })
+          ).toBeVisible();
         });
 
         test("shows the key flow and three numbered setup steps", async ({
@@ -266,7 +309,7 @@ for (const locale of supportedLanguages) {
 
           await waitForHydration(page);
           await select.selectOption(changed);
-          await page.waitForURL(new RegExp(`/${changed}/docs/${slug}$`));
+          await page.waitForURL(new RegExp(`/${changed}/get-started/${slug}$`));
         });
 
         test("does not scroll the page horizontally on mobile", async ({
@@ -279,9 +322,9 @@ for (const locale of supportedLanguages) {
           expect(overflow).toBeLessThanOrEqual(1);
         });
 
-        test("returns to the docs hub", async ({ page }) => {
+        test("returns to the get-started hub", async ({ page }) => {
           await page.getByTestId("docs-nav-back").click();
-          await page.waitForURL(new RegExp(`/${locale}/docs$`));
+          await page.waitForURL(new RegExp(`/${locale}/get-started$`));
         });
       });
     }
